@@ -1,0 +1,282 @@
+[
+  {
+    "id": "FWB123456789",
+    "fileName": "Document_A1.pdf",
+    "createdAt": "2024-08-15",
+    "classification": "biasa",
+    "status": "dibaca",
+    "fileUrl": "/files/Document_A1.pdf",
+    "createdBy": "Budi Santoso",
+    "noSurat": "123/ABC/2024",
+    "keteranganSurat": "Surat penugasan proyek A1",
+    "waktuPelaksanaanPertama": "2024-09-02",
+    "disposisi": [
+      {
+        "level": 1,
+        "disposisiAt": "2024-08-20",
+        "disposisiBy": "Budi Santoso",
+        "note": "Berikan ke anak buah yang bisa mengerjakan",
+        "accepted": [
+          {
+            "id": "1",
+            "name": "Agus Salim",
+            "readAt": "2024-08-21",
+            "disposisiAt": "2024-08-25",
+            "pelaksanaanAt": ""
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "disposisiAt": "2024-08-25",
+        "disposisiBy": "Agus Salim",
+        "note": "Tolong Kerjakan Proyek ini",
+        "accepted": [
+          {
+            "id": "2",
+            "name": "Yudi Hartono",
+            "readAt": "2024-08-27",
+            "disposisiAt": "2024-08-29",
+            "pelaksanaanAt": ""
+          },
+          {
+            "id": "3",
+            "name": "Rina Anggraini",
+            "readAt": "2024-08-28",
+            "disposisiAt": "2024-08-30",
+            "pelaksanaanAt": ""
+          },
+          {
+            "id": "4",
+            "name": "Dewi Lestari",
+            "readAt": "2024-08-28",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "id": "5",
+            "name": "Ali Hasan",
+            "readAt": "2024-08-29",
+            "disposisiAt": "2024-09-01",
+            "pelaksanaanAt": ""
+          },
+          {
+            "id": "6",
+            "name": "Sri Wahyuni",
+            "readAt": "2024-08-30",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          }
+        ]
+      },
+      {
+        "level": 3,
+        "disposisiAt": "2024-08-27",
+        "disposisiBy": "Yudi Hartono",
+        "note": "Kerjakan Tugas Ini",
+        "accepted": [
+          {
+            "id": "7",
+            "name": "Andi Susanto",
+            "readAt": "2024-09-02",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-09-02"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FWB234567890",
+    "fileName": "Document_B2.pdf",
+    "createdAt": "2024-09-10",
+    "classification": "rahasia",
+    "status": "belum dibaca",
+    "fileUrl": "/files/Document_B2.pdf",
+    "createdBy": "Siti Aminah",
+    "noSurat": "002/B/2024",
+    "keteranganSurat": "Surat rahasia untuk evaluasi internal",
+    "disposisi": [
+      {
+        "level": 1,
+        "disposisiAt": "2024-09-10",
+        "disposisiBy": "Supervisor D",
+        "note": "Harap Lakukan Evaluasi",
+        "accepted": [
+          {
+            "id": "8",
+            "name": "Rahmat Setiawan",
+            "readAt": "2024-09-11",
+            "disposisiAt": "2024-09-13",
+            "pelaksanaanAt": ""
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "disposisiAt": "2024-09-13",
+        "disposisiBy": "Rahmat Setiawan",
+        "note": "Sampaikan ke tim terkait",
+        "accepted": [
+          {
+            "id": "9",
+            "name": "Bambang Setiawan",
+            "readAt": "2024-09-14",
+            "disposisiAt": "2024-09-15",
+            "pelaksanaanAt": ""
+          },
+          {
+            "id": "10",
+            "name": "Yulia Rahma",
+            "readAt": "2024-09-15",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FWB345678901",
+    "fileName": "Document_C3.pdf",
+    "createdAt": "2024-05-30",
+    "classification": "segera",
+    "status": "disposisi 1",
+    "fileUrl": "/files/Document_C3.pdf",
+    "createdBy": "Agus Salim",
+    "noSurat": "003/C/2024",
+    "keteranganSurat": "Laporan segera diperlukan",
+    "disposisi": [
+      {
+        "level": 1,
+        "disposisiAt": "2024-05-31",
+        "disposisiBy": "Supervisor D",
+        "note": "Harap perhatikan urgensinya.",
+        "accepted": [
+          {
+            "id": "11",
+            "name": "Rahmat Setiawan",
+            "readAt": "2024-06-01",
+            "disposisiAt": "2024-06-02",
+            "pelaksanaanAt": ""
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "disposisiAt": "2024-06-02",
+        "disposisiBy": "Rahmat Setiawan",
+        "note": "Kerjakan segera.",
+        "accepted": [
+          {
+            "id": "12",
+            "name": "Siti Aminah",
+            "readAt": "2024-06-03",
+            "disposisiAt": "2024-06-05",
+            "pelaksanaanAt": ""
+          },
+          {
+            "id": "13",
+            "name": "Rina Anggraini",
+            "readAt": "2024-06-04",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FWB456789012",
+    "fileName": "Document_D4.pdf",
+    "createdAt": "2024-07-20",
+    "classification": "biasa",
+    "status": "dibaca",
+    "fileUrl": "/files/Document_D4.pdf",
+    "createdBy": "Dewi Lestari",
+    "noSurat": "004/D/2024",
+    "keteranganSurat": "Permintaan data keuangan",
+    "disposisi": [
+      {
+        "level": 1,
+        "disposisiAt": "2024-07-21",
+        "disposisiBy": "Supervisor E",
+        "note": "Periksa ulang data sebelum dikirim.",
+        "accepted": [
+          {
+            "id": "14",
+            "name": "Laila Kusuma",
+            "readAt": "2024-07-22",
+            "disposisiAt": "2024-07-23",
+            "pelaksanaanAt": ""
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "disposisiAt": "2024-07-23",
+        "disposisiBy": "Laila Kusuma",
+        "note": "Siap kirim, sudah diperiksa.",
+        "accepted": [
+          {
+            "id": "15",
+            "name": "Dewi Lestari",
+            "readAt": "2024-07-24",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-07-25"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "FWB567890123",
+    "fileName": "Document_E5.pdf",
+    "createdAt": "2024-04-14",
+    "classification": "rahasia",
+    "status": "disposisi 2",
+    "fileUrl": "/files/Document_E5.pdf",
+    "createdBy": "Yudi Hartono",
+    "noSurat": "005/E/2024",
+    "keteranganSurat": "Pengujian sistem baru",
+    "disposisi": [
+      {
+        "level": 1,
+        "disposisiAt": "2024-04-15",
+        "disposisiBy": "Manager G",
+        "note": "Siapkan dokumen pendukung.",
+        "accepted": [
+          {
+            "id": "16",
+            "name": "Rina Anggraini",
+            "readAt": "2024-04-16",
+            "disposisiAt": "2024-04-17",
+            "pelaksanaanAt": ""
+          }
+        ]
+      },
+      {
+        "level": 2,
+        "disposisiAt": "2024-04-17",
+        "disposisiBy": "Rina Anggraini",
+        "note": "Proses selanjutnya menunggu konfirmasi.",
+        "accepted": [
+          {
+            "id": "17",
+            "name": "Yudi Hartono",
+            "readAt": "2024-04-18",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-04-18"
+          },
+          {
+            "id": "18",
+            "name": "Budi Santoso",
+            "readAt": "2024-04-19",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          }
+        ]
+      }
+    ]
+  }
+]
