@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
-import PDFViewer from '@/components/preview/PDFViewer';
+import Viewer from '@/components/common/Viewer';
 import Custom404 from '@/pages/404';
 import data from '@/data/letters.json';
 import FileDisplay from "@/components/badges/FileDisplay";
@@ -15,19 +15,19 @@ import History from "@/components/common/History";
 
 const LetterInDetail = () => {
     const router = useRouter();
-    const {id} = router.query;
+    const {uuid} = router.query;
     const [letter, setLetter] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (id) {
-            const selectedLetter = data.find((item) => item.id === id);
+        if (uuid) {
+            const selectedLetter = data.find((item) => item.uuid === uuid);
             if (selectedLetter) {
                 setLetter(selectedLetter);
             }
             setIsLoading(false);
         }
-    }, [id]);
+    }, [uuid]);
 
     if (isLoading) return <div>Loading...</div>;
     if (!letter) return <Custom404/>;
@@ -36,11 +36,11 @@ const LetterInDetail = () => {
 
     return (
         <>
-            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Detail Surat {letter.noSurat}</h1>
-            <div className="flex flex-col-reverse lg:flex-row gap-4 mb-4">
-                <section className="flex-1 overflow-hidden border border-dashed rounded-lg h-fit w-fit">
+            <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Detail Surat {letter.noSurat}</h1>
+            <div className="flex flex-col-reverse lg:flex-row gap-6 mb-6">
+                <section className="flex-1 overflow-hidden border border-gray-300 rounded-lg dark:border-gray-600 w-full">
                     {isPdf ? (
-                        <PDFViewer file={letter.fileUrl}/>
+                        <Viewer file={letter.fileUrl}/>
                     ) : (
                         <div className="flex items-center justify-center h-full text-gray-500 dark:text-gray-300">
                             Preview Saat ini hanya untuk File PDF saja
@@ -48,7 +48,7 @@ const LetterInDetail = () => {
                     )}
                 </section>
 
-                <aside className="w-full lg:w-1/3 border rounded-lg p-4 bg-white shadow-md dark:bg-gray-800">
+                <aside className="w-full lg:w-1/3 border border-gray-300 rounded-lg dark:border-gray-600 p-4 bg-white shadow-md dark:bg-gray-800">
                     <div className="flex justify-between items-center mb-4">
                         <div className="flex justify-start gap-2 items-start text-gray-500">
                             <ClassificationBadge classification={letter.classification}/>
@@ -69,7 +69,7 @@ const LetterInDetail = () => {
                     </div>
                 </aside>
             </div>
-            <History disposisi={letter.disposisi} />
+            <History letter={letter}/>
         </>
     );
 };

@@ -7,7 +7,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
     return (
-        <header className="fixed top-0 left-0 right-0 z-30 w-full bg-white border-b border-gray-200 dark:border-gray-700 dark:bg-gray-800">
+        <header className="fixed top-0 left-0 right-0 z-30 w-full bg-white border-b-2 border-gray-200 dark:border-gray-700 dark:bg-gray-800">
             <nav className="flex items-center justify-between px-4 lg:px-6 py-3">
                 <div className="flex items-center">
                     <button
@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                     </button>
                     <Link href="/" className="ml-2 md:ml-4">
                         <span className="text-xl font-semibold text-gray-700 dark:text-gray-300 text-center">
-                            E - Office
+                            Akmil E - Office
                         </span>
                     </Link>
                 </div>

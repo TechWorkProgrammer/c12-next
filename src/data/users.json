@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "name": "Joko Hasan",
+    "role": "dan"
+  },
+  {
+    "id": "2",
+    "name": "Budi Santoso",
+    "role": "kabag"
+  },
+  {
+    "id": "3",
+    "name": "Agus Salim",
+    "role": "dan"
+  },
+  {
+    "id": "4",
+    "name": "Yudi Hartono",
+    "role": "kabag"
+  },
+  {
+    "id": "5",
+    "name": "Rina Anggraini",
+    "role": "dan"
+  },
+  {
+    "id": "6",
+    "name": "Dewi Lestari",
+    "role": "kabag"
+  },
+  {
+    "id": "7",
+    "name": "Ali Hasan",
+    "role": "dan"
+  },
+  {
+    "id": "8",
+    "name": "Sri Wahyuni",
+    "role": "kabag"
+  }
+]

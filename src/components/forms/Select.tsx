@@ -37,7 +37,7 @@ const Select: FC<SelectProps> = ({ label = null, value, options, defaultValue, o
         option.label.toLowerCase().includes(searchTerm)
     );
 
-    const displayOptions = options.length > 5
+    const displayOptions = options.length > 6
         ? [...filteredOptions.slice(0, 3), { label: '...', value: '' }]
         : filteredOptions;
 
@@ -98,10 +98,10 @@ const Select: FC<SelectProps> = ({ label = null, value, options, defaultValue, o
             {isOpen && (
                 <div
                     className="absolute right-0 mt-2 w-full bg-white border border-gray-300 rounded-lg dark:border-gray-600 py-2 shadow-lg z-10 dark:bg-gray-800">
-                    {options.length > 5 && (
+                    {options.length > 6 && (
                         <div className="px-2 py-1">
                             <Input
-                                label="Cari dari nama penerima"
+                                label="Pencarian"
                                 type="text"
                                 placeholder="Search..."
                                 value={searchTerm}
@@ -114,8 +114,8 @@ const Select: FC<SelectProps> = ({ label = null, value, options, defaultValue, o
                         {displayOptions.map((option) => (
                             <li
                                 key={option.value}
-                                onClick={() => option.value && handleSelect(option.value)}
-                                className={`block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 ${option.value === '' ? 'pointer-events-none text-gray-400 dark:text-gray-500' : ''}`}
+                                onClick={() => handleSelect(option.value)}
+                                className="block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
                             >
                                 {option.label}
                             </li>

@@ -1,20 +1,16 @@
 import React from 'react';
-import {ThemeProvider} from '@/contexts/ThemeContext';
+import ThemeProvider from '@/contexts/ThemeContext';
+import AlertProvider from '@/contexts/AlertContext';
 import '@/styles/globals.css';
 import Head from 'next/head';
-import {useRouter} from 'next/router';
 import Layout from '@/components/Layout';
+import {getRouteName, is404Page} from "@/utils/routeName";
+import {useRouter} from "next/router";
 
 function MyApp({Component, pageProps}) {
     const router = useRouter();
-
-    const getPageTitle = (path: string) => {
-        const baseRoute = path.split('/')[1] || 'Dashboard';
-        const routeName = baseRoute.charAt(0).toUpperCase() + baseRoute.slice(1);
-        return `${routeName} | E-Office`;
-    };
-
-    const initialTitle = getPageTitle(router.pathname);
+    const initialTitle = `${getRouteName(router.pathname)} | Akmil E-Office`;
+    const withoutLayout = is404Page(router.pathname);
 
     return (
         <ThemeProvider>
@@ -47,9 +43,9 @@ function MyApp({Component, pageProps}) {
                 <meta name="msapplication-TileColor" content="#ffffff"/>
                 <meta name="msapplication-TileImage" content="/default.png"/>
             </Head>
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <AlertProvider>
+                {withoutLayout ? <Component {...pageProps} /> : <Layout><Component {...pageProps} /></Layout>}
+            </AlertProvider>
         </ThemeProvider>
     );
 }

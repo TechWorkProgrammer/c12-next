@@ -7,11 +7,12 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
     const [theme, setTheme] = useState('system');
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme') || 'system';
+        document.body.classList.add('bg-gray-50', 'dark:bg-gray-900');
         setTheme(storedTheme);
         applyTheme(storedTheme);
     }, []);
@@ -49,3 +50,5 @@ export const useTheme = () => {
     }
     return context;
 };
+
+export default ThemeProvider;

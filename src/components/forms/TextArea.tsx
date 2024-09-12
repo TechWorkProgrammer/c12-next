@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 
 interface TextareaProps {
     id?: string;
+    name?: string;
     label?: string | null;
     placeholder?: string;
     required?: boolean;
@@ -13,6 +14,7 @@ interface TextareaProps {
 
 const Textarea: FC<TextareaProps> = ({
                                          id,
+                                         name = "textarea",
                                          label = null,
                                          placeholder,
                                          required,
@@ -28,6 +30,7 @@ const Textarea: FC<TextareaProps> = ({
             </legend>
             <textarea
                 id={id}
+                name={name}
                 placeholder={placeholder}
                 required={required}
                 value={value}

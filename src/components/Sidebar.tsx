@@ -6,6 +6,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
+
     return (
         <aside
             className={`fixed top-[3rem] left-0 z-20 w-64 h-screen transition-transform transform ${

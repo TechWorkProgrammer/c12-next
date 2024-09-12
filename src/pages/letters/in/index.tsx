@@ -11,6 +11,8 @@ import DownloadButton from "@/components/badges/DownloadButton";
 import FileDisplay from "@/components/badges/FileDisplay";
 import Filter from "@/components/forms/Filter";
 import Link from "next/link";
+import FloatingButton from "@/components/common/FloatingButton";
+import {useRouter} from "next/router";
 
 const classificationOptions = [
     {label: 'Semua', value: ''},
@@ -37,6 +39,11 @@ const LettersIn: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [filteredData, setFilteredData] = useState(data);
     const [sortOrder, setSortOrder] = useState('default');
+    const router = useRouter();
+
+    const handleCreate = () => {
+        router.push('/letters/in/create').then();
+    };
 
     useEffect(() => {
         let sortedData = [...data];
@@ -49,10 +56,10 @@ const LettersIn: React.FC = () => {
                 sortedData.sort((a, b) => b.fileName.localeCompare(a.fileName));
                 break;
             case 'date-asc':
-                sortedData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+                sortedData.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
                 break;
             case 'date-desc':
-                sortedData.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+                sortedData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
                 break;
             default:
                 sortedData = [...data];
@@ -78,9 +85,10 @@ const LettersIn: React.FC = () => {
 
     return (
         <section className="antialiased">
-            <div className="max-w-screen-lg mx-auto">
-                <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">Surat Masuk</h1>
-                <div className="gap-4 flex lg:flex-row flex-col items-center justify-between">
+            <FloatingButton  onClick={handleCreate}/>
+            <div className="max-w-screen-xl mx-auto">
+                <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Surat Masuk</h1>
+                <div className="gap-2 flex lg:flex-row flex-col items-center justify-between">
                     <div className="w-full">
                         <Input
                             label="Pencarian"
@@ -120,20 +128,20 @@ const LettersIn: React.FC = () => {
                 <div className="my-4">
                     {paginatedData.length > 0 ? (
                         paginatedData.map((item) => (
-                            <Link href={`/letters/in/detail?id=${item.id}`} key={item.id}>
+                            <Link href={`/letters/in/detail?uuid=${item.uuid}`} key={item.uuid}>
                                 <article key={item.id}
-                                         className="mb-4 px-6 pt-4 pb-3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-900 dark:border-gray-700">
+                                         className="mb-4 px-2 pt-2 pb-2 lg:px-6 lg:pt-4 lg:pb-3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-900 dark:border-gray-700">
                                     <div className="flex justify-between items-center mb-4">
                                         <div className="flex justify-start gap-2 items-start text-gray-500">
                                             <ClassificationBadge classification={item.classification}/>
                                             <StatusBadge status={item.status}/>
                                         </div>
-                                        <DownloadButton label={true} fileName={item.fileName} fileUrl={item.fileUrl}/>
+                                        <DownloadButton fileName={item.fileName} fileUrl={item.fileUrl}/>
                                     </div>
                                     <FileDisplay fileName={item.fileName} label={item.keteranganSurat}/>
-                                    <div className="flex justify-between items-center">
+                                    <div className="flex justify-between items-center mt-4">
                                         <span
-                                            className="text-xs text-gray-500 dark:text-gray-500">{item.createdBy}</span>
+                                            className="text-xs text-gray-500 dark:text-gray-500">{item.createdBy.name}</span>
                                         <span
                                             className="text-xs text-gray-500 dark:text-gray-500">{dateFormatter(item.createdAt)}</span>
                                     </div>

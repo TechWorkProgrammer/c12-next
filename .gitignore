@@ -13,7 +13,7 @@ package-lock.json
 /out/
 
 # production
-/.idea
+.idea/
 /build
 
 # misc

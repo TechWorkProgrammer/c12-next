@@ -1,277 +1,411 @@
 [
   {
-    "id": "FWB123456789",
+    "uuid": "uuid-001",
     "fileName": "Document_A1.pdf",
-    "createdAt": "2024-08-15",
-    "classification": "biasa",
-    "status": "dibaca",
+    "createdAt": "2024-08-15T08:00:00",
+    "classification": "segera",
+    "status": "disposisi 3",
     "fileUrl": "/files/Document_A1.pdf",
-    "createdBy": "Budi Santoso",
+    "createdBy": {
+      "name": "Joko Hasan",
+      "role": "Manager",
+      "uuid": "user-uuid-123"
+    },
     "noSurat": "123/ABC/2024",
     "keteranganSurat": "Surat penugasan proyek A1",
-    "waktuPelaksanaanPertama": "2024-09-02",
+    "accepted": [
+      {
+        "uuid": "user-uuid-124",
+        "name": "Budi Santoso",
+        "role": "Supervisor",
+        "readAt": "2024-08-15T09:00:00"
+      }
+    ],
     "disposisi": [
       {
+        "uuid": "disposisi-uuid-001",
         "level": 1,
-        "disposisiAt": "2024-08-20",
-        "disposisiBy": "Budi Santoso",
-        "note": "Berikan ke anak buah yang bisa mengerjakan",
+        "disposisiAt": "2024-08-15T10:00:00",
+        "disposisiBy": {
+          "uuid": "user-uuid-124",
+          "name": "Budi Santoso",
+          "role": "Supervisor",
+          "signature": "/signatures/signature_budi.png"
+        },
+        "note": "Berikan ke tim untuk ditindaklanjuti",
+        "context": "Pengarahan awal tugas kepada tim untuk pembagian pekerjaan.",
         "accepted": [
           {
-            "id": "1",
+            "uuid": "user-uuid-125",
             "name": "Agus Salim",
-            "readAt": "2024-08-21",
-            "disposisiAt": "2024-08-25",
-            "pelaksanaanAt": ""
-          }
-        ]
-      },
-      {
-        "level": 2,
-        "disposisiAt": "2024-08-25",
-        "disposisiBy": "Agus Salim",
-        "note": "Tolong Kerjakan Proyek ini",
-        "accepted": [
-          {
-            "id": "2",
-            "name": "Yudi Hartono",
-            "readAt": "2024-08-27",
-            "disposisiAt": "2024-08-29",
+            "role": "Staff",
+            "readAt": "2024-08-15T10:30:00",
+            "disposisiAt": "2024-08-16T09:00:00",
             "pelaksanaanAt": ""
           },
           {
-            "id": "3",
+            "uuid": "user-uuid-126",
             "name": "Rina Anggraini",
-            "readAt": "2024-08-28",
-            "disposisiAt": "2024-08-30",
+            "role": "Staff",
+            "readAt": "2024-08-15T11:00:00",
+            "disposisiAt": "2024-08-16T10:00:00",
             "pelaksanaanAt": ""
           },
           {
-            "id": "4",
+            "uuid": "user-uuid-127",
             "name": "Dewi Lestari",
-            "readAt": "2024-08-28",
-            "disposisiAt": "",
+            "role": "Staff",
+            "readAt": "2024-08-15T12:00:00",
+            "disposisiAt": "2024-08-16T11:00:00",
             "pelaksanaanAt": ""
           },
           {
-            "id": "5",
+            "uuid": "user-uuid-128",
             "name": "Ali Hasan",
-            "readAt": "2024-08-29",
-            "disposisiAt": "2024-09-01",
+            "role": "Staff",
+            "readAt": "2024-08-15T13:00:00",
+            "disposisiAt": "2024-08-16T12:00:00",
             "pelaksanaanAt": ""
           },
           {
-            "id": "6",
+            "uuid": "user-uuid-129",
             "name": "Sri Wahyuni",
-            "readAt": "2024-08-30",
-            "disposisiAt": "",
+            "role": "Staff",
+            "readAt": "2024-08-15T14:00:00",
+            "disposisiAt": "2024-08-16T13:00:00",
             "pelaksanaanAt": ""
           }
         ]
       },
       {
-        "level": 3,
-        "disposisiAt": "2024-08-27",
-        "disposisiBy": "Yudi Hartono",
-        "note": "Kerjakan Tugas Ini",
-        "accepted": [
-          {
-            "id": "7",
-            "name": "Andi Susanto",
-            "readAt": "2024-09-02",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-09-02"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "FWB234567890",
-    "fileName": "Document_B2.pdf",
-    "createdAt": "2024-09-10",
-    "classification": "rahasia",
-    "status": "belum dibaca",
-    "fileUrl": "/files/Document_B2.pdf",
-    "createdBy": "Siti Aminah",
-    "noSurat": "002/B/2024",
-    "keteranganSurat": "Surat rahasia untuk evaluasi internal",
-    "disposisi": [
-      {
-        "level": 1,
-        "disposisiAt": "2024-09-10",
-        "disposisiBy": "Supervisor D",
-        "note": "Harap Lakukan Evaluasi",
-        "accepted": [
-          {
-            "id": "8",
-            "name": "Rahmat Setiawan",
-            "readAt": "2024-09-11",
-            "disposisiAt": "2024-09-13",
-            "pelaksanaanAt": ""
-          }
-        ]
-      },
-      {
+        "uuid": "disposisi-uuid-002",
         "level": 2,
-        "disposisiAt": "2024-09-13",
-        "disposisiBy": "Rahmat Setiawan",
-        "note": "Sampaikan ke tim terkait",
+        "disposisiAt": "2024-08-16T14:00:00",
+        "disposisiBy": {
+          "uuid": "user-uuid-125",
+          "name": "Agus Salim",
+          "role": "Staff",
+          "signature": "/signatures/signature_agus.png"
+        },
+        "note": "Pastikan semua bagian dikerjakan dengan baik",
+        "context": "Instruksi lanjutan untuk memastikan proyek berjalan sesuai rencana.",
         "accepted": [
           {
-            "id": "9",
-            "name": "Bambang Setiawan",
-            "readAt": "2024-09-14",
-            "disposisiAt": "2024-09-15",
-            "pelaksanaanAt": ""
-          },
-          {
-            "id": "10",
-            "name": "Yulia Rahma",
-            "readAt": "2024-09-15",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "FWB345678901",
-    "fileName": "Document_C3.pdf",
-    "createdAt": "2024-05-30",
-    "classification": "segera",
-    "status": "disposisi 1",
-    "fileUrl": "/files/Document_C3.pdf",
-    "createdBy": "Agus Salim",
-    "noSurat": "003/C/2024",
-    "keteranganSurat": "Laporan segera diperlukan",
-    "disposisi": [
-      {
-        "level": 1,
-        "disposisiAt": "2024-05-31",
-        "disposisiBy": "Supervisor D",
-        "note": "Harap perhatikan urgensinya.",
-        "accepted": [
-          {
-            "id": "11",
-            "name": "Rahmat Setiawan",
-            "readAt": "2024-06-01",
-            "disposisiAt": "2024-06-02",
-            "pelaksanaanAt": ""
-          }
-        ]
-      },
-      {
-        "level": 2,
-        "disposisiAt": "2024-06-02",
-        "disposisiBy": "Rahmat Setiawan",
-        "note": "Kerjakan segera.",
-        "accepted": [
-          {
-            "id": "12",
-            "name": "Siti Aminah",
-            "readAt": "2024-06-03",
-            "disposisiAt": "2024-06-05",
-            "pelaksanaanAt": ""
-          },
-          {
-            "id": "13",
-            "name": "Rina Anggraini",
-            "readAt": "2024-06-04",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "FWB456789012",
-    "fileName": "Document_D4.pdf",
-    "createdAt": "2024-07-20",
-    "classification": "biasa",
-    "status": "dibaca",
-    "fileUrl": "/files/Document_D4.pdf",
-    "createdBy": "Dewi Lestari",
-    "noSurat": "004/D/2024",
-    "keteranganSurat": "Permintaan data keuangan",
-    "disposisi": [
-      {
-        "level": 1,
-        "disposisiAt": "2024-07-21",
-        "disposisiBy": "Supervisor E",
-        "note": "Periksa ulang data sebelum dikirim.",
-        "accepted": [
-          {
-            "id": "14",
-            "name": "Laila Kusuma",
-            "readAt": "2024-07-22",
-            "disposisiAt": "2024-07-23",
-            "pelaksanaanAt": ""
-          }
-        ]
-      },
-      {
-        "level": 2,
-        "disposisiAt": "2024-07-23",
-        "disposisiBy": "Laila Kusuma",
-        "note": "Siap kirim, sudah diperiksa.",
-        "accepted": [
-          {
-            "id": "15",
-            "name": "Dewi Lestari",
-            "readAt": "2024-07-24",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-07-25"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "FWB567890123",
-    "fileName": "Document_E5.pdf",
-    "createdAt": "2024-04-14",
-    "classification": "rahasia",
-    "status": "disposisi 2",
-    "fileUrl": "/files/Document_E5.pdf",
-    "createdBy": "Yudi Hartono",
-    "noSurat": "005/E/2024",
-    "keteranganSurat": "Pengujian sistem baru",
-    "disposisi": [
-      {
-        "level": 1,
-        "disposisiAt": "2024-04-15",
-        "disposisiBy": "Manager G",
-        "note": "Siapkan dokumen pendukung.",
-        "accepted": [
-          {
-            "id": "16",
-            "name": "Rina Anggraini",
-            "readAt": "2024-04-16",
-            "disposisiAt": "2024-04-17",
-            "pelaksanaanAt": ""
-          }
-        ]
-      },
-      {
-        "level": 2,
-        "disposisiAt": "2024-04-17",
-        "disposisiBy": "Rina Anggraini",
-        "note": "Proses selanjutnya menunggu konfirmasi.",
-        "accepted": [
-          {
-            "id": "17",
+            "uuid": "user-uuid-130",
             "name": "Yudi Hartono",
-            "readAt": "2024-04-18",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-04-18"
+            "role": "Staff",
+            "readAt": "2024-08-17T09:00:00",
+            "disposisiAt": "2024-08-18T09:00:00",
+            "pelaksanaanAt": ""
           },
           {
-            "id": "18",
-            "name": "Budi Santoso",
-            "readAt": "2024-04-19",
+            "uuid": "user-uuid-131",
+            "name": "Citra Anggraini",
+            "role": "Staff",
+            "readAt": "2024-08-17T10:00:00",
+            "disposisiAt": "2024-08-18T10:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-132",
+            "name": "Dewi Lestari",
+            "role": "Staff",
+            "readAt": "2024-08-17T11:00:00",
+            "disposisiAt": "2024-08-18T11:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-133",
+            "name": "Ali Hasan",
+            "role": "Staff",
+            "readAt": "2024-08-17T12:00:00",
+            "disposisiAt": "2024-08-18T12:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-134",
+            "name": "Sri Wahyuni",
+            "role": "Staff",
+            "readAt": "2024-08-17T13:00:00",
+            "disposisiAt": "2024-08-18T13:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-135",
+            "name": "Andi Susanto",
+            "role": "Staff",
+            "readAt": "2024-08-17T14:00:00",
+            "disposisiAt": "2024-08-18T14:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-136",
+            "name": "Bambang Sutrisno",
+            "role": "Staff",
+            "readAt": "2024-08-17T15:00:00",
+            "disposisiAt": "2024-08-18T15:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-137",
+            "name": "Citra Anggraini",
+            "role": "Staff",
+            "readAt": "2024-08-17T16:00:00",
+            "disposisiAt": "2024-08-18T16:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-138",
+            "name": "Dewi Lestari",
+            "role": "Staff",
+            "readAt": "2024-08-17T17:00:00",
+            "disposisiAt": "2024-08-18T17:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-139",
+            "name": "Ali Hasan",
+            "role": "Staff",
+            "readAt": "2024-08-17T18:00:00",
+            "disposisiAt": "2024-08-18T18:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-140",
+            "name": "Sri Wahyuni",
+            "role": "Staff",
+            "readAt": "2024-08-17T19:00:00",
+            "disposisiAt": "2024-08-18T19:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-141",
+            "name": "Andi Susanto",
+            "role": "Staff",
+            "readAt": "2024-08-17T20:00:00",
+            "disposisiAt": "2024-08-18T20:00:00",
+            "pelaksanaanAt": ""
+          }
+        ]
+      },
+      {
+        "uuid": "disposisi-uuid-003",
+        "level": 3,
+        "disposisiAt": "2024-08-18T21:00:00",
+        "disposisiBy": {
+          "uuid": "user-uuid-130",
+          "name": "Yudi Hartono",
+          "role": "Staff",
+          "signature": "/signatures/signature_yudi.png"
+        },
+        "note": "Finalisasi pekerjaan sesuai jadwal",
+        "context": "Instruksi akhir untuk menyelesaikan proyek tepat waktu.",
+        "accepted": [
+          {
+            "uuid": "user-uuid-142",
+            "name": "Ardi Susanto",
+            "role": "Staff",
+            "readAt": "2024-08-19T09:00:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-08-19T10:00:00"
+          },
+          {
+            "uuid": "user-uuid-143",
+            "name": "Betty Anggraeni",
+            "role": "Staff",
+            "readAt": "2024-08-19T10:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-144",
+            "name": "Carla Dewi",
+            "role": "Staff",
+            "readAt": "2024-08-19T11:00:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-145",
+            "name": "Deni Rahman",
+            "role": "Staff",
+            "readAt": "2024-08-19T11:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-08-19T12:00:00"
+          },
+          {
+            "uuid": "user-uuid-146",
+            "name": "Elisa Nurhaliza",
+            "role": "Staff",
+            "readAt": "2024-08-19T12:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-147",
+            "name": "Fahmi Ardi",
+            "role": "Staff",
+            "readAt": "2024-08-19T13:00:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-08-19T14:00:00"
+          },
+          {
+            "uuid": "user-uuid-148",
+            "name": "Gina Rahma",
+            "role": "Staff",
+            "readAt": "2024-08-19T13:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-149",
+            "name": "Hendra Putra",
+            "role": "Staff",
+            "readAt": "2024-08-19T14:00:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-150",
+            "name": "Ika Sari",
+            "role": "Staff",
+            "readAt": "2024-08-19T14:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-151",
+            "name": "Joko Purnomo",
+            "role": "Staff",
+            "readAt": "2024-08-19T15:00:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-08-19T16:00:00"
+          },
+          {
+            "uuid": "user-uuid-152",
+            "name": "Kiki Rahayu",
+            "role": "Staff",
+            "readAt": "",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-153",
+            "name": "Lina Susanti",
+            "role": "Staff",
+            "readAt": "",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-154",
+            "name": "Maya Dewi",
+            "role": "Staff",
+            "readAt": "2024-08-19T16:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-155",
+            "name": "Nina Anggraeni",
+            "role": "Staff",
+            "readAt": "",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-156",
+            "name": "Oki Pratama",
+            "role": "Staff",
+            "readAt": "2024-08-19T17:00:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-157",
+            "name": "Putri Lestari",
+            "role": "Staff",
+            "readAt": "2024-08-19T17:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-08-19T18:00:00"
+          },
+          {
+            "uuid": "user-uuid-158",
+            "name": "Qori Amalia",
+            "role": "Staff",
+            "readAt": "",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-159",
+            "name": "Raka Saputra",
+            "role": "Staff",
+            "readAt": "2024-08-19T18:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-160",
+            "name": "Sinta Dewi",
+            "role": "Staff",
+            "readAt": "",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-161",
+            "name": "Tina Susanti",
+            "role": "Staff",
+            "readAt": "",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-162",
+            "name": "Umar Sidiq",
+            "role": "Staff",
+            "readAt": "2024-08-19T19:00:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-163",
+            "name": "Vina Anggraini",
+            "role": "Staff",
+            "readAt": "",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-164",
+            "name": "Wahyu Susilo",
+            "role": "Staff",
+            "readAt": "2024-08-19T19:30:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-165",
+            "name": "Xena Kartika",
+            "role": "Staff",
+            "readAt": "",
+            "disposisiAt": "",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-166",
+            "name": "Yoga Pratama",
+            "role": "Staff",
+            "readAt": "2024-08-19T20:00:00",
+            "disposisiAt": "",
+            "pelaksanaanAt": "2024-08-19T20:30:00"
+          },
+          {
+            "uuid": "user-uuid-167",
+            "name": "Zara Nabila",
+            "role": "Staff",
+            "readAt": "",
             "disposisiAt": "",
             "pelaksanaanAt": ""
           }

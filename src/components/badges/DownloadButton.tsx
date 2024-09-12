@@ -19,7 +19,7 @@ const DownloadButton: React.FC<DownloadButtonProps> = ({label = false, fileUrl, 
     return (
         <button
             onClick={handleDownload}
-            className="flex items-center px-1 py-0.5 rounded bg-blue-200 text-blue-800 font-bold text-sm hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="flex items-center p-1 rounded bg-blue-200 text-blue-800 font-bold text-sm hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
             <svg
                 className="w-4 h-4 text-blue-800"

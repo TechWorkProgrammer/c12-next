@@ -192,9 +192,9 @@ const FileDisplay: React.FC<FileDisplayProps> = ({ fileName, label }) => {
     const fileIcon = getFileIcon(extension);
 
     return (
-        <div className="flex justify-start items-center mb-4">
+        <div className="flex justify-start items-center">
             {fileIcon}
-            <h2 className="text-xl font-bold tracking-tight text-gray-900 dark:text-white ms-2">{label}</h2>
+            <h2 className="text-md font-bold tracking-tight text-gray-900 dark:text-white ms-2">{label}</h2>
         </div>
     );
 };
