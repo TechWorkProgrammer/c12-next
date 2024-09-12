@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {dateFormatter} from '@/utils/dateFormatter';
+import React, { useState } from 'react';
+import { dateFormatter } from '@/utils/dateFormatter';
 import Select from "@/components/forms/Select";
 import StatusBadge from "@/components/badges/StatusBadge";
 
-const History = ({letter}) => {
-    const {disposisi, fileName} = letter;
+const History = ({ letter }) => {
+    const { disposisi, fileName } = letter;
     const [filterPerson, setFilterPerson] = useState('all');
     const [showRecipients, setShowRecipients] = useState({});
 
@@ -65,8 +65,8 @@ const History = ({letter}) => {
     const uniqueNames = Array.from(new Set(sortedActions.map((action) => action.person)));
 
     const selectOptions = [
-        {label: 'Semua Orang', value: 'all'},
-        ...uniqueNames.map((name) => ({label: name, value: name}))
+        { label: 'Semua Orang', value: 'all' },
+        ...uniqueNames.map((name) => ({ label: name, value: name }))
     ];
 
     const filteredActions = filterPerson === 'all'
@@ -119,25 +119,31 @@ const History = ({letter}) => {
                                 )}
                                 {showRecipients[action.levelUuid] && (
                                     <ul className="ml-4 mt-2">
-                                        {disposisi.find(d => d.uuid === action.levelUuid)?.accepted.map(recipient => (
-                                            <li key={recipient.uuid} className="flex items-center mb-2">
-                                                <StatusBadge
-                                                    status={
-                                                        recipient.pelaksanaanAt
-                                                            ? 'dilaksanakan'
-                                                            : recipient.disposisiAt
-                                                                ? `disposisi level ${disposisi.find(d => d.accepted.some(a => a.uuid === recipient.uuid)).level}`
-                                                                : recipient.readAt
-                                                                    ? 'dibaca'
-                                                                    : 'belum dibaca'
-                                                    }
-                                                />
-                                                <span className="ml-2">{recipient.name}</span>
-                                                <span className="ml-2 text-xs text-gray-500">
-                                                    {(recipient.pelaksanaanAt || recipient.disposisiAt || recipient.readAt) ? dateFormatter(recipient.pelaksanaanAt || recipient.disposisiAt || recipient.readAt) : ''}
-                                                </span>
-                                            </li>
-                                        ))}
+                                        {disposisi.find(d => d.uuid === action.levelUuid)?.accepted.map(recipient => {
+                                            // Determine the status based on the recipient's actions
+                                            const status = recipient.pelaksanaanAt
+                                                ? 'dilaksanakan'
+                                                : recipient.disposisiAt
+                                                    ? `disposisi level ${disposisi.find(d => d.accepted.some(a => a.uuid === recipient.uuid))?.level || ''}`
+                                                    : recipient.readAt
+                                                        ? 'dibaca'
+                                                        : 'belum dibaca';
+
+                                            // Format the date associated with the current status
+                                            const date = recipient.pelaksanaanAt || recipient.disposisiAt || recipient.readAt;
+
+                                            return (
+                                                <li key={recipient.uuid} className="flex items-center mb-2">
+                                                    <StatusBadge status={status} />
+                                                    <span className="ml-2">{recipient.name}</span>
+                                                    {date && (
+                                                        <span className="ml-2 text-xs text-gray-500">
+                                                            {dateFormatter(date)}
+                                                        </span>
+                                                    )}
+                                                </li>
+                                            );
+                                        })}
                                     </ul>
                                 )}
                             </div>

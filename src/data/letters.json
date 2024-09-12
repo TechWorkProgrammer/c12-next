@@ -50,30 +50,6 @@
             "readAt": "2024-08-15T11:00:00",
             "disposisiAt": "2024-08-16T10:00:00",
             "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-127",
-            "name": "Dewi Lestari",
-            "role": "Staff",
-            "readAt": "2024-08-15T12:00:00",
-            "disposisiAt": "2024-08-16T11:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-128",
-            "name": "Ali Hasan",
-            "role": "Staff",
-            "readAt": "2024-08-15T13:00:00",
-            "disposisiAt": "2024-08-16T12:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-129",
-            "name": "Sri Wahyuni",
-            "role": "Staff",
-            "readAt": "2024-08-15T14:00:00",
-            "disposisiAt": "2024-08-16T13:00:00",
-            "pelaksanaanAt": ""
           }
         ]
       },
@@ -91,7 +67,7 @@
         "context": "Instruksi lanjutan untuk memastikan proyek berjalan sesuai rencana.",
         "accepted": [
           {
-            "uuid": "user-uuid-130",
+            "uuid": "user-uuid-127",
             "name": "Yudi Hartono",
             "role": "Staff",
             "readAt": "2024-08-17T09:00:00",
@@ -99,190 +75,154 @@
             "pelaksanaanAt": ""
           },
           {
-            "uuid": "user-uuid-131",
-            "name": "Citra Anggraini",
+            "uuid": "user-uuid-128",
+            "name": "Dewi Lestari",
             "role": "Staff",
             "readAt": "2024-08-17T10:00:00",
             "disposisiAt": "2024-08-18T10:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-132",
-            "name": "Dewi Lestari",
-            "role": "Staff",
-            "readAt": "2024-08-17T11:00:00",
-            "disposisiAt": "2024-08-18T11:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-133",
-            "name": "Ali Hasan",
-            "role": "Staff",
-            "readAt": "2024-08-17T12:00:00",
-            "disposisiAt": "2024-08-18T12:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-134",
-            "name": "Sri Wahyuni",
-            "role": "Staff",
-            "readAt": "2024-08-17T13:00:00",
-            "disposisiAt": "2024-08-18T13:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-135",
-            "name": "Andi Susanto",
-            "role": "Staff",
-            "readAt": "2024-08-17T14:00:00",
-            "disposisiAt": "2024-08-18T14:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-136",
-            "name": "Bambang Sutrisno",
-            "role": "Staff",
-            "readAt": "2024-08-17T15:00:00",
-            "disposisiAt": "2024-08-18T15:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-137",
-            "name": "Citra Anggraini",
-            "role": "Staff",
-            "readAt": "2024-08-17T16:00:00",
-            "disposisiAt": "2024-08-18T16:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-138",
-            "name": "Dewi Lestari",
-            "role": "Staff",
-            "readAt": "2024-08-17T17:00:00",
-            "disposisiAt": "2024-08-18T17:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-139",
-            "name": "Ali Hasan",
-            "role": "Staff",
-            "readAt": "2024-08-17T18:00:00",
-            "disposisiAt": "2024-08-18T18:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-140",
-            "name": "Sri Wahyuni",
-            "role": "Staff",
-            "readAt": "2024-08-17T19:00:00",
-            "disposisiAt": "2024-08-18T19:00:00",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-141",
-            "name": "Andi Susanto",
-            "role": "Staff",
-            "readAt": "2024-08-17T20:00:00",
-            "disposisiAt": "2024-08-18T20:00:00",
             "pelaksanaanAt": ""
           }
         ]
       },
       {
         "uuid": "disposisi-uuid-003",
-        "level": 3,
-        "disposisiAt": "2024-08-18T21:00:00",
+        "level": 2,
+        "disposisiAt": "2024-08-16T15:00:00",
         "disposisiBy": {
-          "uuid": "user-uuid-130",
+          "uuid": "user-uuid-126",
+          "name": "Rina Anggraini",
+          "role": "Staff",
+          "signature": "/signatures/signature_rina.png"
+        },
+        "note": "Lanjutkan tugas dan pastikan selesai tepat waktu",
+        "context": "Instruksi agar tugas dilanjutkan dengan fokus pada deadline.",
+        "accepted": [
+          {
+            "uuid": "user-uuid-129",
+            "name": "Ali Hasan",
+            "role": "Staff",
+            "readAt": "2024-08-17T11:00:00",
+            "disposisiAt": "2024-08-18T11:00:00",
+            "pelaksanaanAt": ""
+          },
+          {
+            "uuid": "user-uuid-130",
+            "name": "Sri Wahyuni",
+            "role": "Staff",
+            "readAt": "2024-08-17T12:00:00",
+            "disposisiAt": "2024-08-18T12:00:00",
+            "pelaksanaanAt": ""
+          }
+        ]
+      },
+      {
+        "uuid": "disposisi-uuid-004",
+        "level": 3,
+        "disposisiAt": "2024-08-18T13:00:00",
+        "disposisiBy": {
+          "uuid": "user-uuid-127",
           "name": "Yudi Hartono",
           "role": "Staff",
           "signature": "/signatures/signature_yudi.png"
         },
-        "note": "Finalisasi pekerjaan sesuai jadwal",
-        "context": "Instruksi akhir untuk menyelesaikan proyek tepat waktu.",
+        "note": "Finalisasi bagian akhir",
+        "context": "Instruksi terakhir untuk menyelesaikan tugas.",
         "accepted": [
           {
-            "uuid": "user-uuid-142",
-            "name": "Ardi Susanto",
+            "uuid": "user-uuid-131",
+            "name": "Fahmi Ardi",
             "role": "Staff",
             "readAt": "2024-08-19T09:00:00",
             "disposisiAt": "",
             "pelaksanaanAt": "2024-08-19T10:00:00"
           },
           {
-            "uuid": "user-uuid-143",
+            "uuid": "user-uuid-132",
             "name": "Betty Anggraeni",
             "role": "Staff",
             "readAt": "2024-08-19T10:30:00",
             "disposisiAt": "",
             "pelaksanaanAt": ""
-          },
+          }
+        ]
+      },
+      {
+        "uuid": "disposisi-uuid-005",
+        "level": 3,
+        "disposisiAt": "2024-08-18T14:00:00",
+        "disposisiBy": {
+          "uuid": "user-uuid-128",
+          "name": "Dewi Lestari",
+          "role": "Staff",
+          "signature": "/signatures/signature_dewi.png"
+        },
+        "note": "Periksa dan laporkan hasil",
+        "context": "Instruksi untuk memeriksa hasil akhir dan melaporkan.",
+        "accepted": [
           {
-            "uuid": "user-uuid-144",
-            "name": "Carla Dewi",
+            "uuid": "user-uuid-133",
+            "name": "Gina Rahma",
             "role": "Staff",
             "readAt": "2024-08-19T11:00:00",
             "disposisiAt": "",
             "pelaksanaanAt": ""
           },
           {
-            "uuid": "user-uuid-145",
-            "name": "Deni Rahman",
+            "uuid": "user-uuid-134",
+            "name": "Hendra Putra",
             "role": "Staff",
             "readAt": "2024-08-19T11:30:00",
             "disposisiAt": "",
             "pelaksanaanAt": "2024-08-19T12:00:00"
-          },
+          }
+        ]
+      },
+      {
+        "uuid": "disposisi-uuid-006",
+        "level": 3,
+        "disposisiAt": "2024-08-18T15:00:00",
+        "disposisiBy": {
+          "uuid": "user-uuid-129",
+          "name": "Ali Hasan",
+          "role": "Staff",
+          "signature": "/signatures/signature_ali.png"
+        },
+        "note": "Review dan persiapkan laporan akhir",
+        "context": "Instruksi untuk mempersiapkan laporan akhir proyek.",
+        "accepted": [
           {
-            "uuid": "user-uuid-146",
-            "name": "Elisa Nurhaliza",
-            "role": "Staff",
-            "readAt": "2024-08-19T12:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-147",
-            "name": "Fahmi Ardi",
+            "uuid": "user-uuid-135",
+            "name": "Ika Sari",
             "role": "Staff",
             "readAt": "2024-08-19T13:00:00",
             "disposisiAt": "",
             "pelaksanaanAt": "2024-08-19T14:00:00"
           },
           {
-            "uuid": "user-uuid-148",
-            "name": "Gina Rahma",
+            "uuid": "user-uuid-136",
+            "name": "Joko Purnomo",
             "role": "Staff",
             "readAt": "2024-08-19T13:30:00",
             "disposisiAt": "",
             "pelaksanaanAt": ""
-          },
+          }
+        ]
+      },
+      {
+        "uuid": "disposisi-uuid-007",
+        "level": 3,
+        "disposisiAt": "2024-08-18T16:00:00",
+        "disposisiBy": {
+          "uuid": "user-uuid-130",
+          "name": "Sri Wahyuni",
+          "role": "Staff",
+          "signature": "/signatures/signature_sri.png"
+        },
+        "note": "Penutupan dan dokumentasi",
+        "context": "Instruksi untuk penutupan dan dokumentasi proyek.",
+        "accepted": [
           {
-            "uuid": "user-uuid-149",
-            "name": "Hendra Putra",
-            "role": "Staff",
-            "readAt": "2024-08-19T14:00:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-150",
-            "name": "Ika Sari",
-            "role": "Staff",
-            "readAt": "2024-08-19T14:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-151",
-            "name": "Joko Purnomo",
-            "role": "Staff",
-            "readAt": "2024-08-19T15:00:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-08-19T16:00:00"
-          },
-          {
-            "uuid": "user-uuid-152",
+            "uuid": "user-uuid-137",
             "name": "Kiki Rahayu",
             "role": "Staff",
             "readAt": "",
@@ -290,124 +230,12 @@
             "pelaksanaanAt": ""
           },
           {
-            "uuid": "user-uuid-153",
+            "uuid": "user-uuid-138",
             "name": "Lina Susanti",
             "role": "Staff",
-            "readAt": "",
+            "readAt": "2024-08-19T14:30:00",
             "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-154",
-            "name": "Maya Dewi",
-            "role": "Staff",
-            "readAt": "2024-08-19T16:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-155",
-            "name": "Nina Anggraeni",
-            "role": "Staff",
-            "readAt": "",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-156",
-            "name": "Oki Pratama",
-            "role": "Staff",
-            "readAt": "2024-08-19T17:00:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-157",
-            "name": "Putri Lestari",
-            "role": "Staff",
-            "readAt": "2024-08-19T17:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-08-19T18:00:00"
-          },
-          {
-            "uuid": "user-uuid-158",
-            "name": "Qori Amalia",
-            "role": "Staff",
-            "readAt": "",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-159",
-            "name": "Raka Saputra",
-            "role": "Staff",
-            "readAt": "2024-08-19T18:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-160",
-            "name": "Sinta Dewi",
-            "role": "Staff",
-            "readAt": "",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-161",
-            "name": "Tina Susanti",
-            "role": "Staff",
-            "readAt": "",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-162",
-            "name": "Umar Sidiq",
-            "role": "Staff",
-            "readAt": "2024-08-19T19:00:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-163",
-            "name": "Vina Anggraini",
-            "role": "Staff",
-            "readAt": "",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-164",
-            "name": "Wahyu Susilo",
-            "role": "Staff",
-            "readAt": "2024-08-19T19:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-165",
-            "name": "Xena Kartika",
-            "role": "Staff",
-            "readAt": "",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-166",
-            "name": "Yoga Pratama",
-            "role": "Staff",
-            "readAt": "2024-08-19T20:00:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-08-19T20:30:00"
-          },
-          {
-            "uuid": "user-uuid-167",
-            "name": "Zara Nabila",
-            "role": "Staff",
-            "readAt": "",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
+            "pelaksanaanAt": "2024-08-19T15:00:00"
           }
         ]
       }
