@@ -1,4 +1,4 @@
-export const dateFormatter = (date: Date | string | undefined): string => {
+export const dateFormatter = (date: Date | string | undefined | null): string => {
     if (!date) {
         return 'Tanggal tidak ditemukan';
     }

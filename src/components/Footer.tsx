@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
                             loading="eager"
                         />
                     </div>
-                    <span>Akmil Office</span>
+                    <span>SPARTI</span>
                 </a>
                 <p className="text-gray-500 lg:px-16 dark:text-gray-400 text-xs md:text-sm lg:text-base xl:text-lg">
                     Solusi pengarsipan digital unggulan dalam pengelolaan dokumen militer yang aman, efisien, dan

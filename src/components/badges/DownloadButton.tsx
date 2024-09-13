@@ -4,16 +4,21 @@ interface DownloadButtonProps {
     label?: boolean;
     fileUrl: string;
     fileName: string;
+    onGeneratePDF?: () => void;
 }
 
-const DownloadButton: React.FC<DownloadButtonProps> = ({label = false, fileUrl, fileName}) => {
+const DownloadButton: React.FC<DownloadButtonProps> = ({ label = false, fileUrl, fileName, onGeneratePDF }) => {
     const handleDownload = () => {
-        const link = document.createElement('a');
-        link.href = fileUrl;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        if (fileUrl) {
+            const link = document.createElement('a');
+            link.href = fileUrl;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else if (onGeneratePDF) {
+            onGeneratePDF();
+        }
     };
 
     return (

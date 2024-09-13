@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Cara Login Aplikasi",
+    "answer": "Pilih icon di pojok kiri atas, untuk membuka Navigasi, lalu pilih navigasi login, masukkan email dan password. Jika sesuai, maka Anda akan login di dalam website"
+  },
+  {
+    "question": "Cara Menggunakan Halaman Beranda",
+    "answer": "Setelah login, Anda akan langsung diarahkan ke halaman beranda. Di halaman Beranda akan ditampilkan petunjuk operasional dan aktivitas terbaru."
+  },
+  {
+    "question": "Cara Entri Surat Masuk",
+    "answer": "Pilih 'Surat Masuk' dari navigasi. Klik tombol '+' di pojok kanan bawah. Isi nomor surat, pengirim, klasifikasi, dan unggah dokumen terkait. Pastikan data sudah benar sebelum menyimpan."
+  },
+  {
+    "question": "Cara Melacak Surat Masuk",
+    "answer": "Terdapat fitur 'Tracking Surat Masuk' di 'Surat Masuk' untuk memantau perkembangan surat. Anda bisa melihat status disposisi dan siapa saja yang telah memproses surat."
+  },
+  {
+    "question": "Cara Menggunakan Fitur Disposisi Surat",
+    "answer": "Dengan menggunakan fitur 'Disposisi Surat' yang berada di halaman 'Surat Masuk'. Anda dapat meneruskan surat ke pihak terkait dengan minimal dua level disposisi dan memastikan alur surat yang tepat."
+  },
+  {
+    "question": "Cara Entri Surat Keluar",
+    "answer": "Pilih 'Surat Keluar' dari navigasi. Klik tombol '+' dan masukkan informasi surat seperti tujuan, nomor agenda, dan unggah dokumen terkait."
+  },
+  {
+    "question": "Cara Melacak Surat Keluar",
+    "answer": "Terdapat fitur 'Tracking Surat Keluar di 'Surat Keluar' untuk memantau perkembangan surat. Anda bisa melihat status pengiriman dan proses yang sudah dilalui."
+  },
+  {
+    "question": "Cara Menggunakan Fitur Tracking dan Monitoring",
+    "answer": "Pantau status surat masuk dan keluar secara real-time menggunakan fitur 'Tracking dan Monitoring', yang memungkinkan pemantauan perkembangan dokumen."
+  },
+  {
+    "question": "Cara Menggunakan Fitur Pencarian",
+    "answer": "Gunakan fitur pencarian untuk mencari surat berdasarkan nomor, pengirim, atau perihal tertentu. Hal ini mempermudah proses penelusuran dokumen."
+  },
+  {
+    "question": "Cara Menggunakan Fitur Notifikasi",
+    "answer": "Fitur notifikasi menampilkan informasi terkait surat yang membutuhkan tindakan segera, memastikan pengguna selalu responsif terhadap tugas yang ada. Notifikasi akan secara langsung di kirim melalui email pengguna"
+  }
+]

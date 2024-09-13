@@ -18,7 +18,7 @@ const Alert: FC<AlertProps> = ({
                                    buttons = [],
                                }) => {
     const [visible, setVisible] = useState(true);
-    const [timeLeft, setTimeLeft] = useState(5);
+    const [timeLeft, setTimeLeft] = useState(3);
 
     useEffect(() => {
         if (autoDismiss) {

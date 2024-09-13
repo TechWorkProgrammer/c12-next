@@ -13,6 +13,8 @@ import Filter from "@/components/forms/Filter";
 import Link from "next/link";
 import FloatingButton from "@/components/common/FloatingButton";
 import {useRouter} from "next/router";
+import {getCurrentUser} from '@/storage/userStorage';
+import {LetterIn} from '@/interfaces/LetterIn';
 
 const classificationOptions = [
     {label: 'Semua', value: ''},
@@ -25,9 +27,8 @@ const statusOptions = [
     {label: 'Semua', value: ''},
     {label: 'Dibaca', value: 'dibaca'},
     {label: 'Belum Dibaca', value: 'belum dibaca'},
-    {label: 'Disposisi 1', value: 'disposisi 1'},
-    {label: 'Disposisi 2', value: 'disposisi 2'},
-    {label: 'Disposisi 3', value: 'disposisi 3'},
+    {label: 'Disposisi', value: 'disposisi'},
+    {label: 'Dilaksanakan', value: 'dilaksanakan'},
 ];
 
 const LettersIn: React.FC = () => {
@@ -37,7 +38,7 @@ const LettersIn: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    const [filteredData, setFilteredData] = useState(data);
+    const [filteredData, setFilteredData] = useState<LetterIn[]>(data);
     const [sortOrder, setSortOrder] = useState('default');
     const router = useRouter();
 
@@ -45,38 +46,61 @@ const LettersIn: React.FC = () => {
         router.push('/letters/in/create').then();
     };
 
+    const currentUser = getCurrentUser();
+    const userUuid = currentUser ? currentUser.uuid : '';
+
+    const getStatus = (item: LetterIn, userUuid: string) => {
+        if (item.disposisi.some((disp) => disp.penerima.some((acc) => acc.uuid === userUuid && acc.pelaksanaan_at))) {
+            return 'dilaksanakan';
+        }
+        if (item.disposisi.some((disp) => disp.penerima.some((acc) => acc.uuid === userUuid && acc.read_at))) {
+            return 'dibaca';
+        }
+        if (item.disposisi.some((disp) => disp.penerima.some((acc) => acc.uuid === userUuid && !acc.read_at))) {
+            return 'belum dibaca';
+        }
+        if (item.disposisi.some((disp) => disp.created_by.uuid === userUuid)) {
+            return 'disposisi';
+        }
+        return 'tidak terdefinisi';
+    };
+
     useEffect(() => {
         let sortedData = [...data];
 
         switch (sortOrder) {
             case 'name-asc':
-                sortedData.sort((a, b) => a.fileName.localeCompare(b.fileName));
+                sortedData.sort((a, b) => a.file_surat.localeCompare(b.file_surat));
                 break;
             case 'name-desc':
-                sortedData.sort((a, b) => b.fileName.localeCompare(a.fileName));
+                sortedData.sort((a, b) => b.file_surat.localeCompare(a.file_surat));
                 break;
             case 'date-asc':
-                sortedData.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+                sortedData.sort((a, b) => new Date(a.tanggal_surat).getTime() - new Date(b.tanggal_surat).getTime());
                 break;
             case 'date-desc':
-                sortedData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+                sortedData.sort((a, b) => new Date(b.tanggal_surat).getTime() - new Date(a.tanggal_surat).getTime());
                 break;
             default:
                 sortedData = [...data];
         }
 
         const filtered = sortedData.filter((item) => {
-            const isDateMatch = selectedDate ? new Date(item.date).toISOString().slice(0, 10) === selectedDate : true;
+            const isDateMatch = selectedDate ? new Date(item.tanggal_surat).toISOString().slice(0, 10) === selectedDate : true;
+            const letterStatus = getStatus(item, userUuid);
+
             return (
-                item.fileName.toLowerCase().includes(search.toLowerCase()) &&
-                (classification ? item.classification === classification : true) &&
-                (status ? item.status === status : true) &&
+                (item.no_surat.toLowerCase().includes(search.toLowerCase()) ||
+                    item.created_by.name.toLowerCase().includes(search.toLowerCase()) ||
+                    item.perihal.toLowerCase().includes(search.toLowerCase())) &&
+                (classification ? item.klasifikasi_surat.name === classification : true) &&
+                (status ? letterStatus === status : true) &&
                 isDateMatch
             );
         });
         setFilteredData(filtered);
         setCurrentPage(1);
-    }, [search, classification, status, selectedDate, sortOrder]);
+    }, [search, classification, status, selectedDate, sortOrder, userUuid]);
 
     const paginatedData = filteredData.slice(
         (currentPage - 1) * itemsPerPage,
@@ -85,7 +109,7 @@ const LettersIn: React.FC = () => {
 
     return (
         <section className="antialiased">
-            <FloatingButton  onClick={handleCreate}/>
+            <FloatingButton onClick={handleCreate}/>
             <div className="max-w-screen-xl mx-auto">
                 <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">Surat Masuk</h1>
                 <div className="gap-2 flex lg:flex-row flex-col items-center justify-between">
@@ -94,7 +118,7 @@ const LettersIn: React.FC = () => {
                             label="Pencarian"
                             id="search"
                             type="text"
-                            placeholder="Cari berdasarkan nama surat"
+                            placeholder="Cari berdasarkan no surat, nama pengirim, atau perihal"
                             onChange={(e) => setSearch(e.target.value)}
                         />
                     </div>
@@ -129,21 +153,24 @@ const LettersIn: React.FC = () => {
                     {paginatedData.length > 0 ? (
                         paginatedData.map((item) => (
                             <Link href={`/letters/in/detail?uuid=${item.uuid}`} key={item.uuid}>
-                                <article key={item.id}
-                                         className="mb-4 px-2 pt-2 pb-2 lg:px-6 lg:pt-4 lg:pb-3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-900 dark:border-gray-700">
+                                <article
+                                    className="mb-4 px-2 pt-2 pb-2 lg:px-6 lg:pt-4 lg:pb-3 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-900 dark:border-gray-700">
                                     <div className="flex justify-between items-center mb-4">
                                         <div className="flex justify-start gap-2 items-start text-gray-500">
-                                            <ClassificationBadge classification={item.classification}/>
-                                            <StatusBadge status={item.status}/>
+                                            <ClassificationBadge classification={item.klasifikasi_surat.name}/>
+                                            <StatusBadge status={getStatus(item, userUuid)}/>
                                         </div>
-                                        <DownloadButton fileName={item.fileName} fileUrl={item.fileUrl}/>
+                                        <DownloadButton fileName={item.file_surat} fileUrl={item.file_surat}/>
                                     </div>
-                                    <FileDisplay fileName={item.fileName} label={item.keteranganSurat}/>
+                                    <FileDisplay fileName={item.file_surat} label={item.no_surat}/>
+                                    <h1 className="text-sm text-gray-500 dark:text-gray-500 mt-2">
+                                        {item.perihal}
+                                    </h1>
                                     <div className="flex justify-between items-center mt-4">
                                         <span
-                                            className="text-xs text-gray-500 dark:text-gray-500">{item.createdBy.name}</span>
+                                            className="text-xs text-gray-500 dark:text-gray-500">{item.created_by.name}</span>
                                         <span
-                                            className="text-xs text-gray-500 dark:text-gray-500">{dateFormatter(item.createdAt)}</span>
+                                            className="text-xs text-gray-500 dark:text-gray-500">{dateFormatter(item.tanggal_surat)}</span>
                                     </div>
                                 </article>
                             </Link>

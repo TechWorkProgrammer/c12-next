@@ -1,42 +1,96 @@
 [
   {
-    "id": "1",
+    "uuid": "user-1",
     "name": "Joko Hasan",
-    "role": "dan"
+    "email": "joko@company.com",
+    "password": "password123",
+    "role": "Pejabat",
+    "pejabat": {
+      "uuid": "pejabat-1",
+      "name": "Komandan A",
+      "atasan_id": null,
+      "created_at": "2024-09-01T12:00:00Z",
+      "updated_at": "2024-09-01T12:00:00Z"
+    },
+    "created_at": "2024-09-01T12:00:00Z",
+    "updated_at": "2024-09-01T12:00:00Z"
   },
   {
-    "id": "2",
+    "uuid": "user-2",
     "name": "Budi Santoso",
-    "role": "kabag"
+    "email": "budi@company.com",
+    "password": "password123",
+    "role": "Pejabat",
+    "pejabat": {
+      "uuid": "pejabat-2",
+      "name": "Kasub A",
+      "atasan_id": {
+        "uuid": "pejabat-3",
+        "name": "Kabag A",
+        "created_at": "2024-09-01T12:00:00Z",
+        "updated_at": "2024-09-01T12:00:00Z"
+      },
+      "created_at": "2024-09-01T12:00:00Z",
+      "updated_at": "2024-09-01T12:00:00Z"
+    },
+    "created_at": "2024-09-01T12:00:00Z",
+    "updated_at": "2024-09-01T12:00:00Z"
   },
   {
-    "id": "3",
+    "uuid": "user-3",
     "name": "Agus Salim",
-    "role": "dan"
+    "email": "agus@company.com",
+    "password": "password123",
+    "role": "Pejabat",
+    "pejabat": {
+      "uuid": "pejabat-3",
+      "name": "Kabag A",
+      "atasan_id": {
+        "uuid": "pejabat-1",
+        "name": "Komandan A",
+        "created_at": "2024-09-01T12:00:00Z",
+        "updated_at": "2024-09-01T12:00:00Z"
+      },
+      "created_at": "2024-09-01T12:00:00Z",
+      "updated_at": "2024-09-01T12:00:00Z"
+    },
+    "created_at": "2024-09-01T12:00:00Z",
+    "updated_at": "2024-09-01T12:00:00Z"
   },
   {
-    "id": "4",
-    "name": "Yudi Hartono",
-    "role": "kabag"
+    "uuid": "user-4",
+    "name": "Tata Usaha",
+    "email": "tatausaha@company.com",
+    "password": "password123",
+    "role": "Tata usaha",
+    "created_at": "2024-09-01T12:00:00Z",
+    "updated_at": "2024-09-01T12:00:00Z"
   },
   {
-    "id": "5",
-    "name": "Rina Anggraini",
-    "role": "dan"
+    "uuid": "user-5",
+    "name": "Pelaksana",
+    "email": "pelaksana@company.com",
+    "password": "password123",
+    "role": "Pelaksana",
+    "created_at": "2024-09-01T12:00:00Z",
+    "updated_at": "2024-09-01T12:00:00Z"
   },
   {
-    "id": "6",
-    "name": "Dewi Lestari",
-    "role": "kabag"
+    "uuid": "user-6",
+    "name": "Administrator",
+    "email": "admin@company.com",
+    "password": "password123",
+    "role": "Administrator",
+    "created_at": "2024-09-01T12:00:00Z",
+    "updated_at": "2024-09-01T12:00:00Z"
   },
   {
-    "id": "7",
-    "name": "Ali Hasan",
-    "role": "dan"
-  },
-  {
-    "id": "8",
-    "name": "Sri Wahyuni",
-    "role": "kabag"
+    "uuid": "user-7",
+    "name": "External",
+    "email": "external@company.com",
+    "password": "password123",
+    "role": "External",
+    "created_at": "2024-09-01T12:00:00Z",
+    "updated_at": "2024-09-01T12:00:00Z"
   }
 ]

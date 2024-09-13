@@ -1,4 +1,4 @@
-import React, {createContext, ReactNode, useContext, useEffect, useState} from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 interface ThemeContextType {
     theme: string;
@@ -7,14 +7,17 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
-    const [theme, setTheme] = useState('system');
+const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [theme, setTheme] = useState('system'); // Default value should be consistent with server rendering
+    const [mounted, setMounted] = useState(false); // To ensure consistent hydration
 
     useEffect(() => {
-        const storedTheme = localStorage.getItem('theme') || 'system';
-        document.body.classList.add('bg-gray-50', 'dark:bg-gray-900');
-        setTheme(storedTheme);
-        applyTheme(storedTheme);
+        if (typeof window !== 'undefined') {
+            const storedTheme = localStorage.getItem('theme') || 'system';
+            setTheme(storedTheme);
+            applyTheme(storedTheme);
+        }
+        setMounted(true);
     }, []);
 
     const applyTheme = (selectedTheme: string) => {
@@ -26,18 +29,22 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
             document.documentElement.classList.remove('light');
         } else {
             document.documentElement.classList.remove('dark');
-            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
         }
     };
 
     const toggleTheme = (selectedTheme: string) => {
         setTheme(selectedTheme);
-        localStorage.setItem('theme', selectedTheme);
-        applyTheme(selectedTheme);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('theme', selectedTheme);
+            applyTheme(selectedTheme);
+        }
     };
 
+    if (!mounted) return null;
+
     return (
-        <ThemeContext.Provider value={{theme, toggleTheme}}>
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
     );

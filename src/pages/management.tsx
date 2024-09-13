@@ -2,7 +2,7 @@ import React from "react";
 import {Faq} from "@/interfaces/Faq";
 import faqsData from "@/data/faq.json";
 
-const Home: React.FC = () => {
+const Management: React.FC = () => {
     const faqs: Faq[] = faqsData;
 
     return (
@@ -30,4 +30,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default Management;

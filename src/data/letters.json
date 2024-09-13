@@ -1,244 +1,214 @@
 [
   {
     "uuid": "uuid-001",
-    "fileName": "Document_A1.pdf",
-    "createdAt": "2024-08-15T08:00:00",
-    "classification": "segera",
-    "status": "disposisi 3",
-    "fileUrl": "/files/Document_A1.pdf",
-    "createdBy": {
-      "name": "Joko Hasan",
-      "role": "Manager",
-      "uuid": "user-uuid-123"
+    "file_surat": "/files/Document_A1.pdf",
+    "no_surat": "123/ABC/2024",
+    "klasifikasi_surat": {
+      "uuid": "klasifikasi-uuid-001",
+      "name": "segera",
+      "created_at": "2024-08-15T08:00:00",
+      "updated_at": "2024-08-15T08:00:00"
     },
-    "noSurat": "123/ABC/2024",
-    "keteranganSurat": "Surat penugasan proyek A1",
-    "accepted": [
-      {
-        "uuid": "user-uuid-124",
-        "name": "Budi Santoso",
-        "role": "Supervisor",
-        "readAt": "2024-08-15T09:00:00"
-      }
-    ],
+    "tanggal_surat": "2024-08-15T08:00:00",
+    "pengirim": {
+      "uuid": "user-uuid-123",
+      "name": "Joko Hasan",
+      "email": "joko@company.com",
+      "role": "Manager",
+      "created_at": "2024-08-14T08:00:00",
+      "updated_at": "2024-08-14T08:00:00"
+    },
+    "created_by": {
+      "uuid": "user-uuid-123",
+      "name": "Joko Hasan",
+      "email": "joko@company.com",
+      "role": "Manager",
+      "created_at": "2024-08-14T08:00:00",
+      "updated_at": "2024-08-14T08:00:00"
+    },
+    "perihal": "Surat penugasan proyek A1",
+    "read_at": "2024-08-15T09:00:00",
+    "penerima": {
+      "uuid": "user-uuid-124",
+      "name": "Budi Santoso",
+      "email": "budi@company.com",
+      "role": "Supervisor",
+      "created_at": "2024-08-14T09:00:00",
+      "updated_at": "2024-08-14T09:00:00"
+    },
     "disposisi": [
       {
         "uuid": "disposisi-uuid-001",
-        "level": 1,
-        "disposisiAt": "2024-08-15T10:00:00",
-        "disposisiBy": {
+        "disposisi_asal": null,
+        "catatan": "Berikan ke tim untuk ditindaklanjuti",
+        "tanda_tangan": "/signatures/signature.png",
+        "created_by": {
           "uuid": "user-uuid-124",
           "name": "Budi Santoso",
+          "email": "budi@company.com",
           "role": "Supervisor",
-          "signature": "/signatures/signature_budi.png"
+          "created_at": "2024-08-14T09:00:00",
+          "updated_at": "2024-08-14T09:00:00"
         },
-        "note": "Berikan ke tim untuk ditindaklanjuti",
-        "context": "Pengarahan awal tugas kepada tim untuk pembagian pekerjaan.",
-        "accepted": [
+        "penerima": [
           {
             "uuid": "user-uuid-125",
             "name": "Agus Salim",
+            "email": "agus@company.com",
             "role": "Staff",
-            "readAt": "2024-08-15T10:30:00",
-            "disposisiAt": "2024-08-16T09:00:00",
-            "pelaksanaanAt": ""
+            "created_at": "2024-08-15T10:30:00",
+            "updated_at": "2024-08-15T10:30:00",
+            "read_at": "2024-08-15T10:30:00",
+            "pelaksanaan_at": null
           },
           {
             "uuid": "user-uuid-126",
             "name": "Rina Anggraini",
+            "email": "rina@company.com",
             "role": "Staff",
-            "readAt": "2024-08-15T11:00:00",
-            "disposisiAt": "2024-08-16T10:00:00",
-            "pelaksanaanAt": ""
+            "created_at": "2024-08-15T11:00:00",
+            "updated_at": "2024-08-15T11:00:00",
+            "read_at": "2024-08-15T11:00:00",
+            "pelaksanaan_at": null
           }
-        ]
+        ],
+        "isi": [
+          {
+            "uuid": "isi-uuid-001",
+            "isi": "Segera",
+            "created_at": "2024-08-15T10:00:00",
+            "updated_at": "2024-08-15T10:00:00"
+          },
+          {
+            "uuid": "isi-uuid-002",
+            "isi": "Kerjakan",
+            "created_at": "2024-08-15T10:05:00",
+            "updated_at": "2024-08-15T10:05:00"
+          },
+          {
+            "uuid": "isi-uuid-003",
+            "isi": "Printkan",
+            "created_at": "2024-08-15T10:10:00",
+            "updated_at": "2024-08-15T10:10:00"
+          }
+        ],
+        "created_at": "2024-08-15T10:00:00",
+        "updated_at": "2024-08-15T10:00:00"
       },
       {
         "uuid": "disposisi-uuid-002",
-        "level": 2,
-        "disposisiAt": "2024-08-16T14:00:00",
-        "disposisiBy": {
+        "disposisi_asal": {
+          "uuid": "disposisi-uuid-001",
+          "created_at": "2024-08-15T10:00:00",
+          "updated_at": "2024-08-15T10:00:00"
+        },
+        "catatan": "Pastikan semua bagian dikerjakan dengan baik",
+        "tanda_tangan": "/signatures/signature.png",
+        "created_by": {
           "uuid": "user-uuid-125",
           "name": "Agus Salim",
+          "email": "agus@company.com",
           "role": "Staff",
-          "signature": "/signatures/signature_agus.png"
+          "created_at": "2024-08-15T10:30:00",
+          "updated_at": "2024-08-15T10:30:00"
         },
-        "note": "Pastikan semua bagian dikerjakan dengan baik",
-        "context": "Instruksi lanjutan untuk memastikan proyek berjalan sesuai rencana.",
-        "accepted": [
+        "penerima": [
           {
             "uuid": "user-uuid-127",
             "name": "Yudi Hartono",
+            "email": "yudi@company.com",
             "role": "Staff",
-            "readAt": "2024-08-17T09:00:00",
-            "disposisiAt": "2024-08-18T09:00:00",
-            "pelaksanaanAt": ""
+            "created_at": "2024-08-17T09:00:00",
+            "updated_at": "2024-08-17T09:00:00",
+            "read_at": "2024-08-17T09:00:00",
+            "pelaksanaan_at": null
           },
           {
             "uuid": "user-uuid-128",
             "name": "Dewi Lestari",
+            "email": "dewi@company.com",
             "role": "Staff",
-            "readAt": "2024-08-17T10:00:00",
-            "disposisiAt": "2024-08-18T10:00:00",
-            "pelaksanaanAt": ""
+            "created_at": "2024-08-17T10:00:00",
+            "updated_at": "2024-08-17T10:00:00",
+            "read_at": null,
+            "pelaksanaan_at": null
           }
-        ]
+        ],
+        "isi": [
+          {
+            "uuid": "isi-uuid-004",
+            "isi": "Bagikan",
+            "created_at": "2024-08-16T14:00:00",
+            "updated_at": "2024-08-16T14:00:00"
+          },
+          {
+            "uuid": "isi-uuid-005",
+            "isi": "Arahkan",
+            "created_at": "2024-08-16T14:05:00",
+            "updated_at": "2024-08-16T14:05:00"
+          }
+        ],
+        "created_at": "2024-08-16T14:00:00",
+        "updated_at": "2024-08-16T14:00:00"
       },
       {
         "uuid": "disposisi-uuid-003",
-        "level": 2,
-        "disposisiAt": "2024-08-16T15:00:00",
-        "disposisiBy": {
-          "uuid": "user-uuid-126",
-          "name": "Rina Anggraini",
-          "role": "Staff",
-          "signature": "/signatures/signature_rina.png"
+        "disposisi_asal": {
+          "uuid": "disposisi-uuid-002",
+          "created_at": "2024-08-16T14:00:00",
+          "updated_at": "2024-08-16T14:00:00"
         },
-        "note": "Lanjutkan tugas dan pastikan selesai tepat waktu",
-        "context": "Instruksi agar tugas dilanjutkan dengan fokus pada deadline.",
-        "accepted": [
+        "catatan": "Periksa hasil pekerjaan dan berikan umpan balik.",
+        "tanda_tangan": "/signatures/signature.png",
+        "created_by": {
+          "uuid": "user-uuid-127",
+          "name": "Yudi Hartono",
+          "email": "yudi@company.com",
+          "role": "Staff",
+          "created_at": "2024-08-17T09:00:00",
+          "updated_at": "2024-08-17T09:00:00"
+        },
+        "penerima": [
           {
             "uuid": "user-uuid-129",
-            "name": "Ali Hasan",
+            "name": "Andi Wijaya",
+            "email": "andi@company.com",
             "role": "Staff",
-            "readAt": "2024-08-17T11:00:00",
-            "disposisiAt": "2024-08-18T11:00:00",
-            "pelaksanaanAt": ""
+            "created_at": "2024-08-18T09:00:00",
+            "updated_at": "2024-08-18T09:00:00",
+            "read_at": "2024-08-18T09:30:00",
+            "pelaksanaan_at": null
           },
           {
             "uuid": "user-uuid-130",
-            "name": "Sri Wahyuni",
+            "name": "Siti Rahma",
+            "email": "siti@company.com",
             "role": "Staff",
-            "readAt": "2024-08-17T12:00:00",
-            "disposisiAt": "2024-08-18T12:00:00",
-            "pelaksanaanAt": ""
+            "created_at": "2024-08-18T10:00:00",
+            "updated_at": "2024-08-18T10:00:00",
+            "read_at": "2024-08-18T10:30:00",
+            "pelaksanaan_at": "2024-08-18T11:00:00"
           }
-        ]
-      },
-      {
-        "uuid": "disposisi-uuid-004",
-        "level": 3,
-        "disposisiAt": "2024-08-18T13:00:00",
-        "disposisiBy": {
-          "uuid": "user-uuid-127",
-          "name": "Yudi Hartono",
-          "role": "Staff",
-          "signature": "/signatures/signature_yudi.png"
-        },
-        "note": "Finalisasi bagian akhir",
-        "context": "Instruksi terakhir untuk menyelesaikan tugas.",
-        "accepted": [
+        ],
+        "isi": [
           {
-            "uuid": "user-uuid-131",
-            "name": "Fahmi Ardi",
-            "role": "Staff",
-            "readAt": "2024-08-19T09:00:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-08-19T10:00:00"
+            "uuid": "isi-uuid-006",
+            "isi": "Revisi",
+            "created_at": "2024-08-17T15:00:00",
+            "updated_at": "2024-08-17T15:00:00"
           },
           {
-            "uuid": "user-uuid-132",
-            "name": "Betty Anggraeni",
-            "role": "Staff",
-            "readAt": "2024-08-19T10:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
+            "uuid": "isi-uuid-007",
+            "isi": "Feedback",
+            "created_at": "2024-08-17T15:05:00",
+            "updated_at": "2024-08-17T15:05:00"
           }
-        ]
-      },
-      {
-        "uuid": "disposisi-uuid-005",
-        "level": 3,
-        "disposisiAt": "2024-08-18T14:00:00",
-        "disposisiBy": {
-          "uuid": "user-uuid-128",
-          "name": "Dewi Lestari",
-          "role": "Staff",
-          "signature": "/signatures/signature_dewi.png"
-        },
-        "note": "Periksa dan laporkan hasil",
-        "context": "Instruksi untuk memeriksa hasil akhir dan melaporkan.",
-        "accepted": [
-          {
-            "uuid": "user-uuid-133",
-            "name": "Gina Rahma",
-            "role": "Staff",
-            "readAt": "2024-08-19T11:00:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-134",
-            "name": "Hendra Putra",
-            "role": "Staff",
-            "readAt": "2024-08-19T11:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-08-19T12:00:00"
-          }
-        ]
-      },
-      {
-        "uuid": "disposisi-uuid-006",
-        "level": 3,
-        "disposisiAt": "2024-08-18T15:00:00",
-        "disposisiBy": {
-          "uuid": "user-uuid-129",
-          "name": "Ali Hasan",
-          "role": "Staff",
-          "signature": "/signatures/signature_ali.png"
-        },
-        "note": "Review dan persiapkan laporan akhir",
-        "context": "Instruksi untuk mempersiapkan laporan akhir proyek.",
-        "accepted": [
-          {
-            "uuid": "user-uuid-135",
-            "name": "Ika Sari",
-            "role": "Staff",
-            "readAt": "2024-08-19T13:00:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-08-19T14:00:00"
-          },
-          {
-            "uuid": "user-uuid-136",
-            "name": "Joko Purnomo",
-            "role": "Staff",
-            "readAt": "2024-08-19T13:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          }
-        ]
-      },
-      {
-        "uuid": "disposisi-uuid-007",
-        "level": 3,
-        "disposisiAt": "2024-08-18T16:00:00",
-        "disposisiBy": {
-          "uuid": "user-uuid-130",
-          "name": "Sri Wahyuni",
-          "role": "Staff",
-          "signature": "/signatures/signature_sri.png"
-        },
-        "note": "Penutupan dan dokumentasi",
-        "context": "Instruksi untuk penutupan dan dokumentasi proyek.",
-        "accepted": [
-          {
-            "uuid": "user-uuid-137",
-            "name": "Kiki Rahayu",
-            "role": "Staff",
-            "readAt": "",
-            "disposisiAt": "",
-            "pelaksanaanAt": ""
-          },
-          {
-            "uuid": "user-uuid-138",
-            "name": "Lina Susanti",
-            "role": "Staff",
-            "readAt": "2024-08-19T14:30:00",
-            "disposisiAt": "",
-            "pelaksanaanAt": "2024-08-19T15:00:00"
-          }
-        ]
+        ],
+        "created_at": "2024-08-17T15:00:00",
+        "updated_at": "2024-08-17T15:00:00"
       }
-    ]
+    ],
+    "created_at": "2024-08-12T08:00:00",
+    "updated_at": "2024-08-12T08:00:00"
   }
 ]

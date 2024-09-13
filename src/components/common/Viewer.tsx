@@ -40,7 +40,7 @@ const Viewer: FC<ViewerProps> = ({ file }) => {
 
         if (fileType.includes('pdf')) {
             return <iframe src={fileUrl} className="w-full h-[70vh]" title="PDF Preview" />;
-        } else if (fileType.includes('image')) {
+        } else if (fileType.includes('png')) {
             return (
                 <Image
                     src={fileUrl}

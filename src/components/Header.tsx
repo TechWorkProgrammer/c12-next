@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar }) => {
                     </button>
                     <Link href="/" className="ml-2 md:ml-4">
                         <span className="text-xl font-semibold text-gray-700 dark:text-gray-300 text-center">
-                            Akmil E - Office
+                            SPARTI
                         </span>
                     </Link>
                 </div>
