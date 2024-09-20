@@ -1,18 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useTheme} from "@/contexts/ThemeContext";
 
 interface DateInputProps {
-    label?: string | null;
+    label?: string;
+    selectedDate?: string | null;
     onChange: (selectedDate: string) => void;
 }
 
-const Datepicker: React.FC<DateInputProps> = ({label = null, onChange}) => {
-    const [selectedDate, setSelectedDate] = useState('');
-    const { theme } = useTheme();
-
+const Datepicker: React.FC<DateInputProps> = ({label = null, selectedDate = '', onChange}) => {
+    const {theme} = useTheme();
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const date = e.target.value;
-        setSelectedDate(date);
         onChange(date);
     };
 
@@ -26,10 +24,10 @@ const Datepicker: React.FC<DateInputProps> = ({label = null, onChange}) => {
                     type="date"
                     value={selectedDate}
                     onChange={handleDateChange}
+                    className="bg-inherit text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 pt-1 pb-2 outline-none dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     style={{
                         colorScheme: theme === 'dark' ? 'dark' : 'light',
                     }}
-                    className="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-3 pt-1 pb-2 outline-none dark:bg-gray-900 dark:text-white dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
             </div>
         </fieldset>

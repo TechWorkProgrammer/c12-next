@@ -1,26 +1,51 @@
 import React from 'react';
 import Link from "next/link";
-import {getCurrentUser, logoutUser} from '@/storage/userStorage';
+import {getCurrentUser, logoutUser} from '@/storage/auth';
 import {useAlert} from "@/contexts/AlertContext";
+import {useLoader} from "@/contexts/LoadingContext";
+import {useTheme} from "@/contexts/ThemeContext";
+import {useTranslation} from "@/utils/useTranslation";
 
 interface SidebarProps {
     isOpen: boolean;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
+    const {sidebarPosition} = useTheme();
     const user = getCurrentUser();
     const alert = useAlert();
+    const setLoading = useLoader();
+    const text = useTranslation();
 
     const handleLogout = () => {
-        alert.success("Kamu berhasil logout");
-        logoutUser();
+        alert.warning(
+            "Apakah Anda yakin ingin logout?",
+            false,
+            () => {
+                executeLogout().then();
+            }
+        );
+    };
+
+    const executeLogout = async () => {
+        setLoading(true);
+        try {
+            await logoutUser();
+            alert.success("Kamu berhasil logout");
+        } catch (error) {
+            alert.danger(error.message || 'Gagal logout, silakan coba lagi.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
         <aside
-            className={`fixed top-[3rem] left-0 z-20 w-64 h-screen transition-transform transform ${
-                isOpen ? 'translate-x-0' : '-translate-x-full'
-            } bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700`}
+            className={`fixed top-[3rem] ${
+                sidebarPosition === 'left' ? 'left-0' : 'right-0'
+            } z-20 w-64 h-screen transition-transform transform ${
+                isOpen ? 'translate-x-0' : sidebarPosition === 'left' ? '-translate-x-full' : 'translate-x-full'
+            } bg-white dark:bg-gray-800 border-x border-gray-200 dark:border-gray-700`}
         >
             <div className="overflow-y-auto py-5 px-3 h-fit">
                 {user && (
@@ -57,36 +82,39 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
                                 />
                             </svg>
                             <span
-                                className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">Dashboard</span>
+                                className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">{text('dashboard')}</span>
                         </Link>
                     </li>
-                    {user && (
+                    {user && user.role !== "Administrator" && (
                         <>
-                            <li>
-                                <Link
-                                    href="/letters/in"
-                                    className="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                                >
-                                    <svg
-                                        className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                                        aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
+                            {user.role !== "External" && (
+                                <li>
+                                    <Link
+                                        href="/letters/in"
+                                        className="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                                     >
-                                        <path
-                                            stroke="currentColor"
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth="2"
-                                            d="M5 12V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-4m5-13v4a1 1 0 0 1-1 1H5m0 6h9m0 0-2-2m2 2-2 2"
-                                        />
-                                    </svg>
-                                    <span
-                                        className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">Surat
-                                        Masuk</span>
-                                </Link>
-                            </li>
+                                        <svg
+                                            className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                            aria-hidden="true"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path
+                                                stroke="currentColor"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="2"
+                                                d="M5 12V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-4m5-13v4a1 1 0 0 1-1 1H5m0 6h9m0 0-2-2m2 2-2 2"
+                                            />
+                                        </svg>
+                                        <span
+                                            className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
+                                            {text('letters_in')}
+                                        </span>
+                                    </Link>
+                                </li>
+                            )}
                             <li>
                                 <Link
                                     href="/letters/out"
@@ -108,11 +136,34 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
                                         />
                                     </svg>
                                     <span
-                                        className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">Surat
-                                        Keluar</span>
+                                        className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
+                                        {text('letters_out')}
+                                    </span>
                                 </Link>
                             </li>
                         </>
+                    )}
+                    {user && user.role === "Administrator" && (
+                        <li>
+                            <Link
+                                href="/management"
+                                className="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                            >
+                                <svg
+                                    className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                    viewBox="0 0 24 24">
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
+                                          strokeWidth="2"
+                                          d="M19 6c0 1.657-3.134 3-7 3S5 7.657 5 6m14 0c0-1.657-3.134-3-7-3S5 4.343 5 6m14 0v6M5 6v6m0 0c0 1.657 3.134 3 7 3s7-1.343 7-3M5 12v6c0 1.657 3.134 3 7 3s7-1.343 7-3v-6"/>
+                                </svg>
+                                <span
+                                    className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
+                                    {text('management')}
+                                </span>
+                            </Link>
+                        </li>
                     )}
                 </ul>
 
@@ -139,7 +190,9 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
                                     />
                                 </svg>
                                 <span
-                                    className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">Logout</span>
+                                    className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
+                                    {text('logout')}
+                                </span>
                             </button>
                         </li>
                     ) : (
@@ -164,25 +217,9 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
                                     />
                                 </svg>
                                 <span
-                                    className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">Login</span>
-                            </Link>
-                        </li>
-                    )}
-                    {user && user.role === "Administrator" && (
-                        <li>
-                            <Link
-                                href="/management"
-                                className="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                            >
-                                <svg className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true"
-                                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                     viewBox="0 0 24 24">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                          strokeWidth="2"
-                                          d="M19 6c0 1.657-3.134 3-7 3S5 7.657 5 6m14 0c0-1.657-3.134-3-7-3S5 4.343 5 6m14 0v6M5 6v6m0 0c0 1.657 3.134 3 7 3s7-1.343 7-3M5 12v6c0 1.657 3.134 3 7 3s7-1.343 7-3v-6"/>
-                                </svg>
-                                <span
-                                    className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">Manajemen</span>
+                                    className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
+                                    {text('login')}
+                                </span>
                             </Link>
                         </li>
                     )}
@@ -214,7 +251,9 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
                                 />
                             </svg>
                             <span
-                                className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">Pengaturan</span>
+                                className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
+                                {text('settings')}
+                            </span>
                         </Link>
                     </li>
                 </ul>

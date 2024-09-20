@@ -1,4 +1,4 @@
-import {Identifiable} from "@/interfaces/identifiable";
+import {Identifiable} from "@/interfaces/Identifiable";
 
 export interface TimeStamp extends Identifiable {
     created_at: string;

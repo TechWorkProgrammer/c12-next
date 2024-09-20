@@ -3,18 +3,30 @@ import React, { createContext, ReactNode, useContext, useEffect, useState } from
 interface ThemeContextType {
     theme: string;
     toggleTheme: (theme: string) => void;
+    sidebarPosition: 'left' | 'right';
+    toggleSidebarPosition: (position: string) => void;
+    fontFamily: string;
+    toggleFontFamily: (font: string) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [theme, setTheme] = useState('system'); // Default value should be consistent with server rendering
-    const [mounted, setMounted] = useState(false); // To ensure consistent hydration
+    const [theme, setTheme] = useState('system');
+    const [sidebarPosition, setSidebarPosition] = useState<'left' | 'right'>('left');
+    const [fontFamily, setFontFamily] = useState('nunito');
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const storedTheme = localStorage.getItem('theme') || 'system';
+            const storedPosition = localStorage.getItem('sidebarPosition') || 'left';
+            const storedFontFamily = localStorage.getItem('fontFamily') || 'nunito';
             setTheme(storedTheme);
+            setSidebarPosition(storedPosition as 'left' | 'right');
+            setFontFamily(storedFontFamily);
+
+            applyFontFamily(storedFontFamily);
             applyTheme(storedTheme);
         }
         setMounted(true);
@@ -33,6 +45,10 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         }
     };
 
+    const applyFontFamily = (selectedFontFamily: string) => {
+        document.documentElement.style.setProperty('--tw-font-family', selectedFontFamily);
+    };
+
     const toggleTheme = (selectedTheme: string) => {
         setTheme(selectedTheme);
         if (typeof window !== 'undefined') {
@@ -41,10 +57,23 @@ const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
         }
     };
 
+    const toggleSidebarPosition = (position: 'left' | 'right') => {
+        setSidebarPosition(position);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('sidebarPosition', position);
+        }
+    };
+
+    const toggleFontFamily = (font: string) => {
+        setFontFamily(font);
+        localStorage.setItem('fontFamily', font);
+        applyFontFamily(font);
+    };
+
     if (!mounted) return null;
 
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme, sidebarPosition, toggleSidebarPosition, fontFamily, toggleFontFamily }}>
             {children}
         </ThemeContext.Provider>
     );

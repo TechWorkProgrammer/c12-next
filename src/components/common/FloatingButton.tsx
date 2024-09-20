@@ -7,7 +7,7 @@ interface ButtonProps {
 
 const FloatingButton: FC<ButtonProps> = ({onClick, disabled = false}) => {
     return (
-        <div className="fixed end-6 bottom-6 group">
+        <div className="fixed end-6 bottom-6 group z-50">
             <button
                 onClick={onClick}
                 disabled={disabled}

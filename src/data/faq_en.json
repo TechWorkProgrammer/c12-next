@@ -1,0 +1,62 @@
+[
+  {
+    "question": "How to Login to the Application",
+    "answer": "Click the icon in the top left corner to open the navigation, then select the login option. Enter your registered email and password. If the information is correct, you will be directed to the main dashboard of the application."
+  },
+  {
+    "question": "How to Use the Home Page",
+    "answer": "After logging in, you will be taken to the Home page. Here, you can view the latest notifications, a list of letters that require action, and a summary of system activities. Use the menu at the top for quick navigation."
+  },
+  {
+    "question": "How to Enter Incoming Letters",
+    "answer": "To input incoming letters, select 'Incoming Letters' from the navigation. Click the '+' button in the bottom right corner. Fill in the letter number, sender, classification, and upload the related document. Make sure all information is correct before clicking the Save button."
+  },
+  {
+    "question": "How to Track Incoming Letters",
+    "answer": "On the 'Incoming Letters' page, you can use the 'Incoming Letter Tracking' feature to monitor the letter's progress. The system will display the disposition status and who has processed the letter."
+  },
+  {
+    "question": "How to Use the Letter Disposition Feature",
+    "answer": "With the 'Letter Disposition' feature on the 'Incoming Letters' page, you can forward the letter to the relevant officer. The disposition process involves at least two levels, ensuring the correct flow of the letter."
+  },
+  {
+    "question": "How to Enter Outgoing Letters",
+    "answer": "Select 'Outgoing Letters' from the navigation menu. Click the '+' button in the bottom right corner to add a new outgoing letter. Enter the recipient, agenda number, and upload the related document. Once all the data is complete, click the Save button."
+  },
+  {
+    "question": "How to Track Outgoing Letters",
+    "answer": "To monitor the status of outgoing letters, select 'Outgoing Letters' from the menu. Here you can use the 'Outgoing Letter Tracking' feature to check the letter's progress, including delivery status and approval process."
+  },
+  {
+    "question": "How to Use the Tracking and Monitoring Feature",
+    "answer": "Monitor the status of incoming and outgoing letters in real-time through the 'Tracking and Monitoring' feature. This feature makes it easy to track the progress of letters being processed, ongoing dispositions, and delivery status."
+  },
+  {
+    "question": "How to Use the Search Feature",
+    "answer": "Use the search feature located at the top of the 'Incoming Letters' or 'Outgoing Letters' page. You can search for letters by letter number, sender, or specific subject to speed up document tracking."
+  },
+  {
+    "question": "How to Use the Notification Feature",
+    "answer": "The notification feature provides information about letters that require immediate action. Notifications will appear on the dashboard and be sent via email to the registered users."
+  },
+  {
+    "question": "How to Manage Users",
+    "answer": "If you have an Administrator role, you can add, edit, or delete users through the 'User Management' menu. Each user can be assigned access rights according to their role, such as Administrative Staff, Officer, or Executor."
+  },
+  {
+    "question": "How to Change the Application Theme",
+    "answer": "You can change the application theme between light mode, dark mode, or follow the system settings on the 'Settings' page. The theme will affect the overall interface, including the sidebar and dashboard."
+  },
+  {
+    "question": "How to Logout from the Application",
+    "answer": "To logout, click the menu in the top right corner, then select 'Logout'. All session data will be cleared from the device, and you will need to log in again to access the application."
+  },
+  {
+    "question": "How to Use the QR Code Feature",
+    "answer": "Some letters may include a QR Code for easy tracking and validation. You can scan the QR Code using a mobile application or standard QR scanner to view the letter's status directly."
+  },
+  {
+    "question": "How to Use the PDF Generator Feature",
+    "answer": "You can generate a PDF from an incoming letter on the letter page. Select the letter you want to generate as a PDF, then click the 'Generate PDF' button to download the letter in PDF format."
+  }
+]

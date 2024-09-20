@@ -1,0 +1,102 @@
+{
+  "account": "Account",
+  "all": "All",
+  "appearance": "Appearance",
+  "back_to_home": "Back to Home",
+  "classification": "Classification",
+  "close": "Close",
+  "content": {
+    "dashboard": {
+      "faq": {
+        "description": "You can search for answers to your issues or find out how to use the features of this application below. Just type what you are looking for, and we will help you resolve it.",
+        "input_label": "What’s your issue?",
+        "input_placeholder": "Just type it here",
+        "title": "Having Trouble with This Application?"
+      },
+      "multifunction": {
+        "description": "Easily handle your correspondence needs, from signing, submitting, to delivering documents to others. This application works on various screen sizes and platforms, offering customization options, including flexible language settings.",
+        "title": "Responsive and Versatile Application"
+      },
+      "signature_qr": {
+        "description": "We provide a digital signature feature with QR code to ensure the authenticity and security of your reports. You can place signatures interactively and easily verify documents.",
+        "title": "Want to Sign a Report?"
+      }
+    },
+    "description": "A superior digital archiving solution for secure, efficient, and integrated management of military documents",
+    "filter": {
+      "a_to_z": "Sort from A to Z",
+      "default": "Default",
+      "newest": "Newest items",
+      "oldest": "Oldest items",
+      "z_to_a": "Sort from Z to A"
+    },
+    "item_per_page": "Item per page",
+    "promote": "Simplify your correspondence with the help of a SPARTI",
+    "search": {
+      "filter_placeholder": "Search by letter number, sender name, creator name, or subject."
+    },
+    "input": {
+      "file_input": {
+        "label": "Select the file you want to upload or drag the file to this area."
+      }
+    },
+    "alert": {
+      "confirm": "Yes, I am sure."
+    },
+    "letters_in": {
+      "create": {
+        "label": "Create Incoming Letter"
+      }
+    }
+  },
+  "dark": "Dark",
+  "preview": "Preview",
+  "dashboard": "Dashboard",
+  "data_not_found": "Data Not Found",
+  "date": "Date",
+  "default": "default",
+  "disposition": "Disposition",
+  "executed": "Executed",
+  "font": "Font",
+  "font_family": "Font Family",
+  "font_style": "Font Style",
+  "from": "From",
+  "immediately": "Immediately",
+  "language": "Language",
+  "language&region": "Language & Region",
+  "left": "Left",
+  "letters": "Letters",
+  "letters_in": "Letters in",
+  "letters_out": "Letters out",
+  "light": "Light",
+  "login": "Login",
+  "logout": "Logout",
+  "management": "Management",
+  "message": {
+    "data_not_found": "No available data was found",
+    "not_found": "Sorry, what you were looking for was not found",
+    "replace_file_confirmation": "The previous file will be replaced. Are you sure?",
+    "remove_file_confirmation": "Are you sure you want to delete this file?"
+  },
+  "newest": "Newest",
+  "offline": "Offline",
+  "oldest": "Oldest",
+  "page": "Page",
+  "page_not_found": "Page Not Found",
+  "read": "Read",
+  "regular": "Regular",
+  "right": "Right",
+  "search": "Search",
+  "secret": "Secret",
+  "send_by": "Send by",
+  "settings": "Settings",
+  "sidebar_position": "Sidebar Position",
+  "status": "Status",
+  "system": "System",
+  "theme": "Theme",
+  "unread": "Unread",
+  "success": "Success",
+  "info": "Info",
+  "danger": "Danger",
+  "warning": "Warning"
+}

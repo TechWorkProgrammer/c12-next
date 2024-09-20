@@ -1,14 +1,17 @@
 import React from 'react';
+import {useTranslation} from "@/utils/useTranslation";
 
 interface ClassificationBadgeProps {
-    classification: 'rahasia' | 'biasa' | 'segera';
+    classification: string;
 }
 
 const ClassificationBadge: React.FC<ClassificationBadgeProps> = ({classification}) => {
+    const translation = useTranslation();
     const getClassificationStyles = () => {
-        switch (classification) {
+        switch (classification.toLowerCase()) {
             case 'rahasia':
                 return {
+                    text: translation('secret'),
                     icon: (
                         <svg
                             className="w-4 h-4 mr-1 text-red-800"
@@ -30,6 +33,7 @@ const ClassificationBadge: React.FC<ClassificationBadgeProps> = ({classification
                 };
             case 'biasa':
                 return {
+                    text: translation('regular'),
                     icon: (
                         <svg
                             className="w-4 h-4 mr-1 text-blue-800"
@@ -51,6 +55,7 @@ const ClassificationBadge: React.FC<ClassificationBadgeProps> = ({classification
                 };
             case 'segera':
                 return {
+                    text: translation('immediately'),
                     icon: (
                         <svg
                             className="w-4 h-4 mr-1 text-green-800"
@@ -72,6 +77,7 @@ const ClassificationBadge: React.FC<ClassificationBadgeProps> = ({classification
                 };
             default:
                 return {
+                    text: translation(classification.toLowerCase()),
                     icon: (
                         <svg
                             className="w-4 h-4 text-gray-800 dark:text-white"
@@ -92,12 +98,12 @@ const ClassificationBadge: React.FC<ClassificationBadgeProps> = ({classification
         }
     };
 
-    const {icon, bgColor} = getClassificationStyles();
+    const {text, icon, bgColor} = getClassificationStyles();
 
     return (
         <span className={`text-sm font-bold inline-flex items-center ps-1 pe-2 py-0.5 rounded ${bgColor}`}>
             {icon}
-            {classification.charAt(0).toUpperCase() + classification.slice(1)}
+            {text}
         </span>
     );
 };

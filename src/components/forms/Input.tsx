@@ -3,6 +3,7 @@ import React, {FC} from 'react';
 interface InputProps {
     id?: string;
     label?: string | null;
+    name?: string;
     type?: string;
     placeholder?: string;
     required?: boolean;
@@ -11,7 +12,17 @@ interface InputProps {
     disabled?: boolean;
 }
 
-const Input: FC<InputProps> = ({id, label = null, type = 'text', placeholder, required, value, onChange, disabled = false,}) => {
+const Input: FC<InputProps> = ({
+                                   id,
+                                   name = "input",
+                                   label = null,
+                                   type = 'text',
+                                   placeholder,
+                                   required,
+                                   value,
+                                   onChange,
+                                   disabled = false,
+                               }) => {
     return (
         <fieldset className="relative w-full border border-gray-300 rounded-lg dark:border-gray-600">
             <legend className="mx-2 px-1 text-sm font-bold text-gray-500 dark:text-gray-400">
@@ -20,6 +31,7 @@ const Input: FC<InputProps> = ({id, label = null, type = 'text', placeholder, re
             <input
                 type={type}
                 id={id}
+                name={name}
                 placeholder={placeholder}
                 required={required}
                 value={value}

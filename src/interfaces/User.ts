@@ -1,11 +1,17 @@
 import {TimeStamp} from "@/interfaces/TimeStamp";
 
-//  ada surat diterima entah dari tu atau disposisi, lsg dapet email.
 
 export interface User extends TimeStamp, Role {
     name: string;
     email: string;
-    password?: string | null; // abaikan null, buat ga keliatan aja pw nya
+    password?: string | null;
+    jabatan?: string;
+}
+
+export interface UserStatus extends TimeStamp {
+    user_id: string | null;
+    read_at: string | null;
+    pelaksanaan_at: string | null;
 }
 
 export interface EditUser {

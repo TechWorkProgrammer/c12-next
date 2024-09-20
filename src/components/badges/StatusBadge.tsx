@@ -1,15 +1,47 @@
 import React from 'react';
+import { useTranslation } from '@/utils/useTranslation';
 
 interface StatusBadgeProps {
     status: 'dibaca' | 'belum dibaca' | 'disposisi' | 'dilaksanakan' | string;
     onClick?: () => void;
 }
 
-const StatusBadge: React.FC<StatusBadgeProps> = ({ status,  onClick }) => {
+const StatusBadge: React.FC<StatusBadgeProps> = ({ status, onClick }) => {
+    const translation = useTranslation();
+
     const getStatusStyles = () => {
-        switch (status.toLowerCase()) {
+        const lowerStatus = status.toLowerCase();
+
+        if (lowerStatus.includes('disposisi')) {
+            const match = lowerStatus.match(/\d+$/);
+            const dispositionLevel = match ? match[0] : '';
+            return {
+                text: `${translation('disposition')} ${dispositionLevel}`,
+                icon: (
+                    <svg
+                        className="w-4 h-4 mr-1 text-blue-800"
+                        aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M10 3v4a1 1 0 0 1-1 1H5m4 6 2 2 4-4m4-8v16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V7.914a1 1 0 0 1 .293-.707l3.914-3.914A1 1 0 0 1 9.914 3H18a1 1 0 0 1 1 1Z"
+                        />
+                    </svg>
+                ),
+                bgColor: 'bg-blue-100 text-blue-800 dark:bg-blue-200 dark:text-blue-800',
+            };
+        }
+
+        switch (lowerStatus) {
             case 'dibaca':
                 return {
+                    text: translation('read'),
                     icon: (
                         <svg
                             className="w-4 h-4 mr-1 text-green-800"
@@ -31,6 +63,7 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status,  onClick }) => {
                 };
             case 'belum dibaca':
                 return {
+                    text: translation('unread'),
                     icon: (
                         <svg
                             className="w-4 h-4 mr-1 text-yellow-800"
@@ -50,12 +83,9 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status,  onClick }) => {
                     ),
                     bgColor: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-200',
                 };
-            case 'disposisi':
-            case 'disposisi 1':
-            case 'disposisi 2':
-            case 'disposisi 3':
             case 'dilaksanakan':
                 return {
+                    text: translation('executed'),
                     icon: (
                         <svg
                             className="w-4 h-4 mr-1 text-blue-800"
@@ -77,13 +107,12 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status,  onClick }) => {
                 };
             default:
                 return {
+                    text: translation(lowerStatus),
                     icon: (
                         <svg
                             className="w-4 h-4 mr-1 text-gray-800 dark:text-gray-700"
                             aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
                             fill="none"
                             viewBox="0 0 24 24"
                         >
@@ -101,12 +130,12 @@ const StatusBadge: React.FC<StatusBadgeProps> = ({ status,  onClick }) => {
         }
     };
 
-    const { icon, bgColor } = getStatusStyles();
+    const { text, icon, bgColor } = getStatusStyles();
 
     return (
         <span onClick={onClick} className={`text-sm font-bold inline-flex items-center ps-1 pe-2 py-0.5 rounded ${bgColor}`}>
             {icon}
-            {status.charAt(0).toUpperCase() + status.slice(1)}
+            {text}
         </span>
     );
 };

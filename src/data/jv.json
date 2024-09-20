@@ -1,0 +1,81 @@
+{
+  "account": "Akun",
+  "all": "Kabeh",
+  "appearance": "Penampilan",
+  "back_to_home": "Wangsul Menyang Omah",
+  "classification": "Klasifikasi",
+  "content": {
+    "dashboard": {
+      "faq": {
+        "description": "Panjenengan saged nggoleki jawaban tumrap masalah panjenengan utawi nyinaoni carane migunakaken fitur-fitur wonten ing aplikasi menika ing ngandhap. Monggo panjenengan ngetik menopo ingkang dipun golèki, lan kulo badhe mbantu anggone ngrampungaken.",
+        "input_label": "Menopo masalah panjenengan?",
+        "input_placeholder": "Monggo ketik wonten ngriki",
+        "title": "Nduweni Kangelan nganggo Aplikasi Menika?"
+      },
+      "multifunction": {
+        "description": "Panjenengan saged kanthi gampil ngatur kabutuhan surat-menyurat, saking tandha tangan, ngirim, ngantos ngedum dokumen dhumateng tiyang sanes. Aplikasi menika saged dipun ginakaken wonten ing layar kanthi ukuran majemuk lan platform benten-benten, kanthi pilahan kangge ngatur basa lan sanèsipun.",
+        "title": "Aplikasi Responsif lan Versatil"
+      },
+      "signature_qr": {
+        "description": "Panjenengan dipun paringi fitur tandha tangan digital kaliyan kode QR kangge njamin keaslian lan keamanan laporan panjenengan. Panjenengan saged nggèn tandha tangan kanthi interaktif lan kanthi gampil verifikasi dokumen.",
+        "title": "Badhe Tandang Tangan Laporan?"
+      }
+    },
+    "description": "Solusi arsip digital unggul kang aman, efektif, lan terpadu kangge ngatur dokumen militer",
+    "filter": {
+      "a_to_z": "Urut saking A ngantos Z",
+      "default": "Standar",
+      "newest": "Barang paling enggal",
+      "oldest": "Barang paling lawas",
+      "z_to_a": "Urut saking Z ngantos A"
+    },
+    "item_per_page": "Barang saben kaca",
+    "promote": "Simplahaken surat-menyurat panjenengan kaliyan SPARTI",
+    "search": {
+      "filter_placeholder": "Golèk miturut nomer surat, asma pengirim, pangripta, utawi judhul."
+    }
+  },
+  "dark": "Peteng",
+  "dashboard": "Dashboard",
+  "data_not_found": "Data Boten Kepanggih",
+  "date": "Tanggal",
+  "default": "standar",
+  "disposition": "Disposisi",
+  "executed": "Eksekusi",
+  "font": "Huruf",
+  "font_family": "Keluarga Huruf",
+  "font_style": "Gaya Huruf",
+  "from": "Saking",
+  "immediately": "Sakderengipun",
+  "language": "Basa",
+  "language&region": "Basa & Wilayah",
+  "left": "Kiwo",
+  "letters": "Surat",
+  "letters_in": "Surat mlebet",
+  "letters_out": "Surat medal",
+  "light": "Padhang",
+  "login": "Mlebet",
+  "logout": "Metu",
+  "management": "Pengelolaan",
+  "message": {
+    "data_not_found": "Data ingkang kersah boten kepanggih",
+    "not_found": "Nuwun sewu, barang ingkang panjenengan nggoleki boten kepanggih"
+  },
+  "newest": "Paling Enggal",
+  "offline": "Offline",
+  "oldest": "Paling Lawas",
+  "page": "Kaca",
+  "page_not_found": "Kaca Boten Kepanggih",
+  "read": "Maca",
+  "regular": "Biasa",
+  "right": "Tengen",
+  "search": "Golèk",
+  "secret": "Rahasia",
+  "send_by": "Kirim dening",
+  "settings": "Pengaturan",
+  "sidebar_position": "Posisi Sidebar",
+  "status": "Status",
+  "system": "Sistem",
+  "theme": "Tema",
+  "unread": "Dereng dipunwaca"
+}

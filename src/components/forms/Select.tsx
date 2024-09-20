@@ -1,9 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, {FC, useState} from 'react';
 import Input from "@/components/forms/Input";
 
 interface Option {
     label: string;
     value: string;
+    style?: string | null;
 }
 
 interface SelectProps {
@@ -14,7 +15,7 @@ interface SelectProps {
     onChange: (value: string) => void;
 }
 
-const Select: FC<SelectProps> = ({ label = null, value, options, defaultValue, onChange }) => {
+const Select: FC<SelectProps> = ({label = null, value, options, defaultValue, onChange}) => {
     const [selectedValue, setSelectedValue] = useState(value || defaultValue || '');
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -37,8 +38,8 @@ const Select: FC<SelectProps> = ({ label = null, value, options, defaultValue, o
         option.label.toLowerCase().includes(searchTerm)
     );
 
-    const displayOptions = options.length > 6
-        ? [...filteredOptions.slice(0, 3), { label: '...', value: '' }]
+    const displayOptions = options.length > 10
+        ? [...filteredOptions.slice(0, 3), {label: '...', value: ''}]
         : filteredOptions;
 
     return (
@@ -98,7 +99,7 @@ const Select: FC<SelectProps> = ({ label = null, value, options, defaultValue, o
             {isOpen && (
                 <div
                     className="absolute right-0 mt-2 w-full bg-white border border-gray-300 rounded-lg dark:border-gray-600 py-2 shadow-lg z-10 dark:bg-gray-800">
-                    {options.length > 6 && (
+                    {options.length > 10 && (
                         <div className="px-2 py-1">
                             <Input
                                 label="Pencarian"
@@ -106,7 +107,6 @@ const Select: FC<SelectProps> = ({ label = null, value, options, defaultValue, o
                                 placeholder="Search..."
                                 value={searchTerm}
                                 onChange={handleSearch}
-                                className="w-full px-2 py-1 mb-2 border border-gray-300 rounded-md dark:border-gray-600"
                             />
                         </div>
                     )}
@@ -115,7 +115,7 @@ const Select: FC<SelectProps> = ({ label = null, value, options, defaultValue, o
                             <li
                                 key={option.value}
                                 onClick={() => handleSelect(option.value)}
-                                className="block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
+                                className={`block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 ${"style" in option ? option.style : ''} !important`}
                             >
                                 {option.label}
                             </li>

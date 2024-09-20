@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC } from 'react';
+import {useTranslation} from "@/utils/useTranslation";
 
 interface AlertProps {
     type: 'info' | 'danger' | 'success' | 'warning' | 'dark';
     title: string;
     message: string;
-    autoDismiss?: boolean;
     onDismiss: () => void;
     buttons?: { label: string; onClick: () => void }[];
 }
@@ -13,31 +13,10 @@ const Alert: FC<AlertProps> = ({
                                    type,
                                    title,
                                    message,
-                                   autoDismiss = false,
                                    onDismiss,
                                    buttons = [],
                                }) => {
-    const [visible, setVisible] = useState(true);
-    const [timeLeft, setTimeLeft] = useState(3);
-
-    useEffect(() => {
-        if (autoDismiss) {
-            const interval = setInterval(() => {
-                setTimeLeft((prev) => {
-                    if (prev <= 1) {
-                        clearInterval(interval);
-                        setVisible(false);
-                        onDismiss();
-                    }
-                    return prev - 1;
-                });
-            }, 1000);
-            return () => clearInterval(interval);
-        }
-    }, [autoDismiss, onDismiss]);
-
-    if (!visible) return null;
-
+    const text = useTranslation();
     const getColorClasses = () => {
         switch (type) {
             case 'info':
@@ -107,19 +86,17 @@ const Alert: FC<AlertProps> = ({
 
     const handleButtonClick = (buttonOnClick: () => void) => {
         buttonOnClick();
-        setVisible(false);
         onDismiss();
     };
 
     return (
-        <div className="fixed inset-0 flex top-8 justify-center z-50">
+        <div className="fixed bg-gray-800 inset-0 bg-opacity-80 flex justify-center z-50">
             <div
-                className={`w-full max-w-lg h-fit p-4 mb-4 border-2 rounded-lg shadow-lg ${textColor} ${borderColor} ${bgColor} ${darkTextColor} ${darkBorderColor} ${darkBgColor}`}
+                className={`w-full max-w-lg h-fit p-4 my-auto mx-4 border-2 rounded-lg shadow-lg ${textColor} ${borderColor} ${bgColor} ${darkTextColor} ${darkBorderColor} ${darkBgColor}`}
                 role="alert"
             >
                 <div className="flex items-center">
                     <h3 className="text-lg font-medium">{title}</h3>
-                    {autoDismiss && <span className="ml-auto text-sm">{timeLeft}s</span>}
                 </div>
                 <div className="mt-2 mb-4 text-sm">{message}</div>
                 <div className="flex justify-end gap-2">
@@ -127,20 +104,17 @@ const Alert: FC<AlertProps> = ({
                         <button
                             key={index}
                             onClick={() => handleButtonClick(button.onClick)}
-                            className={`text-${textColor} border ${borderColor} ${darkBorderColor} hover:${borderColor} bg-${buttonBg}-800 hover:bg-${buttonBg}-900 focus:ring-4 focus:outline-none focus:ring-${buttonBg}-200 font-medium rounded-lg text-xs px-3 py-1.5`}
+                            className={`text-${textColor} border ${borderColor} ${darkBorderColor} hover:bg-${buttonBg}-700 focus:ring-4 focus:outline-none focus:ring-${buttonBg}-200 font-medium rounded-lg text-xs px-3 py-1.5`}
                         >
                             {button.label}
                         </button>
                     ))}
                     <button
                         type="button"
-                        onClick={() => {
-                            setVisible(false);
-                            onDismiss();
-                        }}
-                        className={`text-${textColor} border ${borderColor} ${darkBorderColor} hover:bg-${buttonBg}-900 focus:ring-4 focus:outline-none focus:ring-${buttonBg}-200 font-medium rounded-lg text-xs px-3 py-1.5`}
+                        onClick={onDismiss}
+                        className={`text-${textColor} border ${borderColor} ${darkBorderColor} hover:bg-${buttonBg}-700 focus:ring-4 focus:outline-none focus:ring-${buttonBg}-200 font-medium rounded-lg text-xs px-3 py-1.5`}
                     >
-                        Tutup
+                        {text('close')}
                     </button>
                 </div>
             </div>

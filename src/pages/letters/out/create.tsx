@@ -76,7 +76,6 @@ const LetterOutCreate: FC = () => {
                     />
                     <Input
                         label="Perihal"
-                        name="perihal"
                         value={letterData.perihal}
                         onChange={handleInputChange}
                         placeholder="Masukan perihal surat"

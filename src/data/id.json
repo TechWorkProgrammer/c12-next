@@ -1,0 +1,34 @@
+{
+  "appearance": "Tampilan",
+  "content": {
+    "promote": "Permudah Surat menyurat dengan bantuan aplikasi SPARTI",
+    "description": "Solusi pengarsipan digital unggulan dalam pengelolaan dokumen militer yang aman, efisien, dan terintegrasi",
+    "dashboard": {
+      "multifunction": {
+        "title": "Aplikasi Responsive dan Serbaguna",
+        "description": "Atasi kebutuhan surat-menyurat Anda dengan mudah, mulai dari tanda tangan, pengajuan, hingga memberikan surat kepada orang lain. Aplikasi ini dapat berjalan di berbagai ukuran layar dan platform, serta menawarkan kustomisasi sesuai keinginan, termasuk pengaturan bahasa yang fleksibel."
+      },
+      "signature_qr": {
+        "title": "Ingin Menanda Tangani Laporan?",
+        "description": "Kami menyediakan fitur tanda tangan digital dengan QR code untuk memastikan keaslian dan keamanan laporan Anda. Anda dapat menempatkan tanda tangan secara interaktif dan memverifikasi dokumen dengan mudah."
+      },
+      "faq": {
+        "title": "Punya Masalah Dengan Aplikasi Ini?",
+        "description": "Anda dapat mencari jawaban masalah anda atau mencari tahu cara menggunakan fitur dari aplikasi ini dibawah. Cukup ketik apa yang ingin Anda cari, dan kami akan membantu Anda menyelesaikannya.",
+        "input_label": "Apa Permasalahanmu?",
+        "input_placeholder": "Ketikan Saja Disini"
+      }
+    }
+  },
+  "dark": "Gelap",
+  "language": "Bahasa",
+  "left": "Kiri",
+  "light": "Terang",
+  "login": "Masuk",
+  "logout": "Keluar",
+  "right": "Kanan",
+  "settings": "Pengaturan",
+  "sidebar_position": "Posisi Sidebar",
+  "system": "Sistem",
+  "theme": "Tema"
+}

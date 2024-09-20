@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import FileDisplay from '@/components/badges/FileDisplay';
 import Modal from '@/components/common/Modal';
 import Viewer from '@/components/common/Viewer';
+import {useTranslation} from "@/utils/useTranslation";
 
 interface FilePreviewProps {
     fileName: string;
@@ -12,6 +13,7 @@ interface FilePreviewProps {
 
 const FilePreview: FC<FilePreviewProps> = ({ fileName, fileSize, onRemove, file }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const text = useTranslation();
 
     return (
         <div className="flex items-center justify-between gap-2 w-full p-2 bg-white border border-gray-300 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-600">
@@ -61,7 +63,7 @@ const FilePreview: FC<FilePreviewProps> = ({ fileName, fileSize, onRemove, file 
                     </svg>
                 </button>
             </div>
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <Modal label={text('preview')} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
                 <Viewer file={file} />
             </Modal>
         </div>

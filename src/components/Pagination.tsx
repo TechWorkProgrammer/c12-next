@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import Select from '@/components/forms/Select';
+import {useTranslation} from "@/utils/useTranslation";
 
 interface PaginationProps {
     totalItems: number;
@@ -25,12 +26,13 @@ const Pagination: FC<PaginationProps> = ({
                                              onItemsPerPageChange,
                                          }) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const text = useTranslation();
 
     return (
         <div className="flex flex-col sm:flex-row gap-4 w-full items-center justify-between">
             <div className="w-full sm:w-auto">
                 <Select
-                    label="Item per Halaman"
+                    label={text('content:item_per_page')}
                     value={itemsPerPage.toString()}
                     options={itemsPerPageOptions}
                     onChange={(value) => onItemsPerPageChange(Number(value))}
@@ -62,7 +64,7 @@ const Pagination: FC<PaginationProps> = ({
                 </button>
 
                 <span className="text-gray-700 dark:text-gray-300 text-sm">
-                    Halaman {currentPage} dari {totalPages}
+                    {text('page')} {currentPage} {text('from').toLowerCase()} {totalPages}
                 </span>
 
                 <button

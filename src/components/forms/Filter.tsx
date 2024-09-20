@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useTranslation} from "@/utils/useTranslation";
 
 interface FilterIconProps {
     onSelect: (value: string) => void;
@@ -6,6 +7,7 @@ interface FilterIconProps {
 
 const Filter: React.FC<FilterIconProps> = ({onSelect}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const text = useTranslation();
 
     const handleToggle = () => {
         setIsOpen((prev) => !prev);
@@ -23,22 +25,12 @@ const Filter: React.FC<FilterIconProps> = ({onSelect}) => {
                 onClick={handleToggle}
                 className="p-2.5"
             >
-                <svg
-                    className="w-6 h-6 text-gray-800 dark:text-white"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                >
-                    <path
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeWidth="2"
-                        d="M18.796 4H5.204a1 1 0 0 0-.753 1.659l5.302 6.058a1 1 0 0 1 .247.659v4.874a.5.5 0 0 0 .2.4l3 2.25a.5.5 0 0 0 .8-.4v-7.124a1 1 0 0 1 .247-.659l5.302-6.059c.566-.646.106-1.658-.753-1.658Z"
-                    />
+                <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                     xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                          d="M7 4v16M7 4l3 3M7 4 4 7m9-3h6l-6 6h6m-6.5 10 3.5-7 3.5 7M14 18h4"/>
                 </svg>
+
             </button>
 
             {isOpen && (
@@ -49,31 +41,31 @@ const Filter: React.FC<FilterIconProps> = ({onSelect}) => {
                             onClick={() => handleSelect('default')}
                             className="block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
-                            Default
+                            {text('content:filter:default')}
                         </li>
                         <li
                             onClick={() => handleSelect('name-asc')}
                             className="block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
-                            Dari Nama A ke Z
+                            {text('content:filter:a_to_z')}
                         </li>
                         <li
                             onClick={() => handleSelect('name-desc')}
                             className="block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
-                            Dari Nama Z ke A
-                        </li>
-                        <li
-                            onClick={() => handleSelect('date-asc')}
-                            className="block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
-                        >
-                            Dari yang terlama
+                            {text('content:filter:z_to_a')}
                         </li>
                         <li
                             onClick={() => handleSelect('date-desc')}
                             className="block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
-                            Dari yang terbaru
+                            {text('content:filter:newest')}
+                        </li>
+                        <li
+                            onClick={() => handleSelect('date-asc')}
+                            className="block px-2 py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                            {text('content:filter:oldest')}
                         </li>
                     </ul>
                 </div>

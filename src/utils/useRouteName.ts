@@ -1,4 +1,4 @@
-export const getRouteName = (path: string): string => {
+export const useRouteName = (path: string): string => {
     const baseRoute = path.split('/')[1] || 'Dashboard';
     return baseRoute.charAt(0).toUpperCase() + baseRoute.slice(1);
 };

@@ -86,7 +86,7 @@ const SignatureModal: React.FC<SignatureModalProps> = ({ isOpen, onClose, onSign
                 />
                 <div className="flex justify-end gap-2 w-full">
                     <Button label="Bersihkan" onClick={clearCanvas} variant="secondary" />
-                    <Button label="Simpan Tanda Tangan" onClick={handleSaveSignature} />
+                    <Button label="Buat Disposisi" onClick={handleSaveSignature} />
                 </div>
             </div>
         </Modal>

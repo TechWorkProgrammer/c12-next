@@ -9,34 +9,17 @@ interface DisposisiCheckboxListProps {
 }
 
 const DisposisiCheckboxList: React.FC<DisposisiCheckboxListProps> = ({ disposisiList, selectedDisposisi, onChange }) => {
-    const half = Math.ceil(disposisiList.length / 2);
-    const leftColumn = disposisiList.slice(0, half);
-    const rightColumn = disposisiList.slice(half);
-
     return (
-        <div className="flex gap-4">
-            <div className="flex flex-col">
-                {leftColumn.map((disposisi) => (
-                    <Checkbox
-                        key={disposisi.uuid}
-                        id={disposisi.uuid}
-                        label={disposisi.isi}
-                        checked={selectedDisposisi.includes(disposisi.uuid)}
-                        onChange={() => onChange(disposisi.uuid)}
-                    />
-                ))}
-            </div>
-            <div className="flex flex-col">
-                {rightColumn.map((disposisi) => (
-                    <Checkbox
-                        key={disposisi.uuid}
-                        id={disposisi.uuid}
-                        label={disposisi.isi}
-                        checked={selectedDisposisi.includes(disposisi.uuid)}
-                        onChange={() => onChange(disposisi.uuid)}
-                    />
-                ))}
-            </div>
+        <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {disposisiList.map((disposisi) => (
+                <Checkbox
+                    key={disposisi.uuid}
+                    id={disposisi.uuid}
+                    label={disposisi.isi}
+                    checked={selectedDisposisi.includes(disposisi.uuid)}
+                    onChange={() => onChange(disposisi.uuid)}
+                />
+            ))}
         </div>
     );
 };

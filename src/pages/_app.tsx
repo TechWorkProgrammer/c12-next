@@ -2,10 +2,12 @@ import React from 'react';
 import ThemeProvider from '@/contexts/ThemeContext';
 import AlertProvider from '@/contexts/AlertContext';
 import '@/styles/globals.css';
-import Head from 'next/head';
 import Layout from '@/components/Layout';
-import {getRouteName, is404Page} from "@/utils/routeName";
+import {is404Page} from "@/utils/useRouteName";
 import {useRouter} from "next/router";
+import LoadingProvider from "@/contexts/LoadingContext";
+import LanguageProvider from "@/contexts/LanguageContext";
+import HeadTitle from '@/components/HeadTitle';
 
 interface MyAppProps {
     Component: React.ComponentType<any>;
@@ -14,24 +16,25 @@ interface MyAppProps {
 
 function MyApp({Component, pageProps}: MyAppProps) {
     const router = useRouter();
-    const initialTitle = `${getRouteName(router.pathname)} | Akmil E-Office`;
     const withoutLayout = is404Page(router.pathname);
 
     return (
-        <ThemeProvider>
-            <AlertProvider>
-                <Head>
-                    <title>{initialTitle}</title>
-                </Head>
-                {!withoutLayout ? (
-                    <Layout>
-                        <Component {...pageProps} />
-                    </Layout>
-                ) : (
-                    <Component {...pageProps} />
-                )}
-            </AlertProvider>
-        </ThemeProvider>
+        <LoadingProvider>
+            <LanguageProvider>
+                <ThemeProvider>
+                    <AlertProvider>
+                        <HeadTitle/>
+                        {!withoutLayout ? (
+                            <Layout>
+                                <Component {...pageProps} />
+                            </Layout>
+                        ) : (
+                            <Component {...pageProps} />
+                        )}
+                    </AlertProvider>
+                </ThemeProvider>
+            </LanguageProvider>
+        </LoadingProvider>
     );
 }
 

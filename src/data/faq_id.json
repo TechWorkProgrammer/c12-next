@@ -1,0 +1,62 @@
+[
+  {
+    "question": "Cara Login Aplikasi",
+    "answer": "Pilih icon di pojok kiri atas untuk membuka Navigasi, lalu pilih navigasi login. Masukkan email dan password yang telah terdaftar. Jika informasi yang dimasukkan benar, Anda akan langsung masuk ke dashboard utama aplikasi."
+  },
+  {
+    "question": "Cara Menggunakan Halaman Beranda",
+    "answer": "Setelah login, Anda akan diarahkan ke halaman Beranda. Di sini, Anda dapat melihat notifikasi terbaru, daftar surat yang membutuhkan tindakan, dan ringkasan aktivitas sistem. Gunakan menu di bagian atas untuk navigasi cepat."
+  },
+  {
+    "question": "Cara Entri Surat Masuk",
+    "answer": "Untuk memasukkan surat masuk, pilih 'Surat Masuk' dari navigasi. Klik tombol '+' di pojok kanan bawah. Isi nomor surat, pengirim, klasifikasi, dan unggah dokumen terkait. Pastikan semua informasi sudah benar sebelum menekan tombol Simpan."
+  },
+  {
+    "question": "Cara Melacak Surat Masuk",
+    "answer": "Pada halaman 'Surat Masuk', Anda dapat menggunakan fitur 'Tracking Surat Masuk' untuk memantau perkembangan surat. Sistem akan menampilkan status disposisi dan siapa saja yang sudah memproses surat tersebut."
+  },
+  {
+    "question": "Cara Menggunakan Fitur Disposisi Surat",
+    "answer": "Dengan fitur 'Disposisi Surat' di halaman 'Surat Masuk', Anda dapat meneruskan surat ke pejabat terkait. Proses disposisi terdiri dari minimal dua level, yaitu level 1 dan level 2, untuk memastikan alur surat yang benar."
+  },
+  {
+    "question": "Cara Entri Surat Keluar",
+    "answer": "Pilih 'Surat Keluar' dari menu navigasi. Klik tombol '+' di pojok kanan bawah untuk menambahkan surat keluar baru. Masukkan tujuan surat, nomor agenda, dan unggah dokumen terkait. Setelah semua data lengkap, tekan tombol Simpan."
+  },
+  {
+    "question": "Cara Melacak Surat Keluar",
+    "answer": "Untuk memantau status surat keluar, pilih 'Surat Keluar' dari menu. Di sini Anda bisa menggunakan fitur 'Tracking Surat Keluar' untuk melihat perkembangan surat, termasuk status pengiriman dan proses pengesahan."
+  },
+  {
+    "question": "Cara Menggunakan Fitur Tracking dan Monitoring",
+    "answer": "Pantau status surat masuk dan keluar secara real-time melalui fitur 'Tracking dan Monitoring'. Fitur ini memudahkan Anda untuk memantau perkembangan surat yang sedang diproses, disposisi yang sedang berlangsung, dan status pengiriman."
+  },
+  {
+    "question": "Cara Menggunakan Fitur Pencarian",
+    "answer": "Gunakan fitur pencarian yang ada di bagian atas halaman 'Surat Masuk' atau 'Surat Keluar'. Anda dapat mencari surat berdasarkan nomor surat, pengirim, atau perihal tertentu untuk mempercepat proses penelusuran dokumen."
+  },
+  {
+    "question": "Cara Menggunakan Fitur Notifikasi",
+    "answer": "Fitur notifikasi menampilkan informasi tentang surat yang memerlukan tindakan segera. Notifikasi ini akan muncul di halaman dashboard, serta dikirimkan melalui email pengguna yang terdaftar."
+  },
+  {
+    "question": "Cara Mengelola Pengguna",
+    "answer": "Jika Anda memiliki peran Administrator, Anda dapat menambah, mengedit, atau menghapus pengguna melalui menu 'Manajemen Pengguna'. Setiap pengguna bisa diberi hak akses sesuai perannya, seperti Tata Usaha, Pejabat, atau Pelaksana."
+  },
+  {
+    "question": "Cara Mengubah Tema Aplikasi",
+    "answer": "Anda dapat mengubah tema aplikasi antara mode terang, gelap, atau mengikuti pengaturan sistem di halaman 'Pengaturan'. Tema akan memengaruhi tampilan antarmuka secara keseluruhan, termasuk sidebar dan dashboard."
+  },
+  {
+    "question": "Cara Logout dari Aplikasi",
+    "answer": "Untuk logout, pilih menu di pojok kanan atas, lalu pilih 'Logout'. Semua data sesi Anda akan dihapus dari perangkat, dan Anda perlu login ulang untuk mengakses aplikasi kembali."
+  },
+  {
+    "question": "Cara Menggunakan Fitur QR Code",
+    "answer": "Beberapa surat mungkin disertai QR Code untuk memudahkan pelacakan dan validasi surat. Anda dapat memindai QR Code menggunakan aplikasi mobile atau scanner QR standar untuk melihat status surat secara langsung."
+  },
+  {
+    "question": "Cara Menggunakan Fitur PDF Generator",
+    "answer": "Anda bisa men-generate PDF dari surat yang sudah masuk melalui halaman surat. Pilih surat yang ingin di-generate PDF-nya, lalu klik tombol 'Generate PDF' untuk mendownload surat dalam bentuk PDF."
+  }
+]

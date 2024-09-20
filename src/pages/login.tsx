@@ -1,23 +1,31 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Input from '@/components/forms/Input';
 import Button from "@/components/common/Button";
-import {loginUser} from '@/storage/userStorage';
-import {useAlert} from "@/contexts/AlertContext";
-import {useRouter} from "next/router";
+import { loginUser } from '@/storage/auth';
+import { useRouter } from "next/router";
+import { useAlert } from "@/contexts/AlertContext";
+import { useLoader } from "@/contexts/LoadingContext";
+import noAuth from '@/hoc/noAuth';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const alert = useAlert();
     const router = useRouter();
+    const setLoading = useLoader();
 
-    const handleLogin = async () => {
-        const user = await loginUser(email, password);
-        if (user) {
-            alert.success('Login berhasil, selamat datang ' + user.name);
-            router.push('/').then();
-        } else {
-            alert.danger('Email atau Password Salah.');
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const user = await loginUser(email, password);
+            setLoading(false);
+            alert.success('Login berhasil, selamat datang ' + user.name, true, undefined, () => {
+                router.push('/').then();
+            });
+        } catch (error) {
+            setLoading(false);
+            alert.danger(error.message);
         }
     };
 
@@ -27,27 +35,29 @@ const Login: React.FC = () => {
             <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-300 text-center">
                 Login Ke Akun Kamu
             </h1>
-            <Input
-                id="email"
-                label="Email Kamu"
-                type="email"
-                placeholder="name@company.com"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <Input
-                id="password"
-                label="Password Kamu"
-                type="password"
-                placeholder="••••••••"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button label="Login" onClick={handleLogin}/>
+            <form onSubmit={handleLogin}>
+                <Input
+                    id="email"
+                    label="Email Kamu"
+                    type="email"
+                    placeholder="name@sparti.online"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <Input
+                    id="password"
+                    label="Password Kamu"
+                    type="password"
+                    placeholder="••••••••"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button label="Login" onClick={()=> handleLogin} />
+            </form>
         </div>
     );
 };
 
-export default Login;
+export default noAuth(Login);
