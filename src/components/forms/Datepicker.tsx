@@ -3,7 +3,7 @@ import {useTheme} from "@/contexts/ThemeContext";
 
 interface DateInputProps {
     label?: string;
-    selectedDate?: string | null;
+    selectedDate?: string;
     onChange: (selectedDate: string) => void;
 }
 

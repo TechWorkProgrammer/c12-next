@@ -13,6 +13,7 @@ import {useLoader} from "@/contexts/LoadingContext";
 import {useRouter} from "next/router";
 import {useTranslation} from "@/utils/useTranslation";
 import withAuth from "@/hoc/withAuth";
+import Skeleton from "@/components/common/Skeleton";
 
 const LetterInCreate: FC = () => {
     const [letterData, setLetterData] = useState<addLetterIn>({
@@ -30,20 +31,27 @@ const LetterInCreate: FC = () => {
     const text = useTranslation();
     const [users, setUsers] = useState<User[]>([]);
     const [classifications, setClassifications] = useState<Klasifikasi[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchInitialData = async () => {
-            try {
-                const response = await client.get('/surat-masuk/create');
-                const {users, classifications} = response.data;
-                setUsers(users);
-                setClassifications(classifications);
-            } catch (error) {
-                console.log('Failed to load data, please try again.');
+            if (users.length === 0) {
+                try {
+                    const response = await client.get('/surat-masuk/create');
+                    const {users, classifications} = response.data;
+                    setUsers(users);
+                    setClassifications(classifications);
+                } catch (error: any) {
+                    console.log(text('message:data_fetch_failed'));
+                } finally {
+                    setIsLoading(false);
+                }
             }
         };
         fetchInitialData().then();
-    }, []);
+    }, [text, users]);
+
+    if (isLoading) return <Skeleton/>
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const {name, value} = e.target;
@@ -76,8 +84,10 @@ const LetterInCreate: FC = () => {
     };
 
     const handleSubmit = async () => {
+        loading(true);
         if (!letterData.file_surat) {
-            alert.danger('Silakan unggah file untuk membuat surat');
+            loading(false);
+            alert.danger(text('message:upload_file_prompt'));
             return;
         }
 
@@ -90,15 +100,14 @@ const LetterInCreate: FC = () => {
         formData.append('penerima_id', letterData.penerima.uuid);
 
         try {
-            loading(true);
             await client.post('/surat-masuk', formData);
             loading(false);
-            alert.success('Surat berhasil dibuat', true, undefined, () => {
+            alert.success(text('message:letter_creation_success'), true, undefined, () => {
                 router.push('/letters/in').then();
             });
         } catch (error: any) {
             loading(false);
-            alert.danger(error.message || "Gagal Upload Surat");
+            alert.danger(error.message || text('message:letter_creation_failed'));
         }
     };
 
@@ -120,12 +129,12 @@ const LetterInCreate: FC = () => {
                 className="w-full lg:w-1/3 border border-gray-300 rounded-lg dark:border-gray-600 p-4 bg-gray-50 shadow-md dark:bg-gray-800">
                 <div className="space-y-3">
                     <Datepicker
-                        label="Tanggal Surat"
-                        selectedDate={letterData.tanggal_surat}
+                        label={text('date')}
+                        selectedDate={letterData.tanggal_surat || ''}
                         onChange={handleDateChange}
                     />
                     <Select
-                        label="Klasifikasi"
+                        label={text('classification')}
                         value={letterData.klasifikasi_surat.name}
                         options={classifications.map((classification) => ({
                             label: classification.name,
@@ -134,31 +143,31 @@ const LetterInCreate: FC = () => {
                         onChange={handleClassificationChange}
                     />
                     <Input
-                        label="Pengirim"
+                        label={text('sender')}
                         name="pengirim"
                         value={letterData.pengirim}
                         onChange={handleInputChange}
-                        placeholder="Masukkan nama pengirim"
+                        placeholder={text('message:letter_sender_prompt')}
                     />
                     <Select
-                        label="Penerima Pertama"
+                        label={text('recepient')}
                         value={letterData.penerima.uuid || ''}
                         options={users.map((user) => ({label: user.name + ' - ' + user.jabatan, value: user.uuid}))}
                         onChange={handleUserChange}
                     />
                     <Textarea
-                        label="Keterangan Surat"
+                        label={text('description')}
                         name="perihal"
                         value={letterData.perihal}
                         onChange={handleInputChange}
-                        placeholder="Masukan Keterangan Surat"
+                        placeholder={text('message:letter_description_prompt')}
                         rows={4}
                     />
-                    <Button label="Turunkan Surat" onClick={handleSubmit} disabled={!isFormComplete}/>
+                    <Button label={text('generate_letter')} onClick={handleSubmit} disabled={!isFormComplete}/>
                 </div>
             </aside>
         </div>
     );
 };
 
-export default withAuth(LetterInCreate, ["Tata usaha", "Pejabat", "Pelaksana"]);
+export default withAuth(LetterInCreate, ["Tata Usaha", "Pejabat", "Pelaksana"]);

@@ -14,7 +14,7 @@ import Link from "next/link";
 import FloatingButton from "@/components/common/FloatingButton";
 import {useRouter} from "next/router";
 import {getCurrentUser} from '@/storage/auth';
-import {DetailLetterIn} from '@/interfaces/LetterIn';
+import {LetterIn} from '@/interfaces/LetterIn';
 import {useTranslation} from "@/utils/useTranslation";
 import Skeleton from "@/components/common/Skeleton";
 import withAuth from "@/hoc/withAuth";
@@ -26,8 +26,8 @@ const LettersIn: React.FC = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    const [validatedData, setValidatedData] = useState<DetailLetterIn[]>([]);
-    const [filteredData, setFilteredData] = useState<DetailLetterIn[]>([]);
+    const [validatedData, setValidatedData] = useState<LetterIn[]>([]);
+    const [filteredData, setFilteredData] = useState<LetterIn[]>([]);
     const [sortOrder, setSortOrder] = useState('default');
     const [loading, setLoading] = useState(true);
     const router = useRouter();
@@ -56,7 +56,7 @@ const LettersIn: React.FC = () => {
                 const response = await client.get('/surat-masuk');
                 setValidatedData(response.data);
                 setFilteredData(response.data);
-            } catch (error) {
+            } catch (error:any) {
                 console.error('Error fetching data:', error);
             } finally {
                 setLoading(false);
@@ -69,7 +69,7 @@ const LettersIn: React.FC = () => {
         router.push('/letters/in/create').then();
     };
 
-    const getStatus = (item: DetailLetterIn) => {
+    const getStatus = (item: LetterIn) => {
         const {user_status} = item;
         if (!user_status) {
             return 'undefined';
@@ -216,4 +216,4 @@ const LettersIn: React.FC = () => {
     );
 };
 
-export default withAuth(LettersIn, ["Tata usaha", "Pejabat", "Pelaksana"]);
+export default withAuth(LettersIn, ["Tata Usaha", "Pejabat", "Pelaksana"]);

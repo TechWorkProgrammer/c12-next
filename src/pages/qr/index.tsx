@@ -1,11 +1,12 @@
-import React, { FC } from 'react';
-import {useTranslation} from "@/utils/useTranslation";
+import React from 'react';
 import Link from "next/link";
+import {useTranslation} from "@/utils/useTranslation";
+import withAuth from "@/hoc/withAuth";
 
-const LetterOutCreate: FC = () => {
+const QRGenerator: React.FC = () => {
     const text = useTranslation();
     return (
-        <main className="w-full h-screen flex items-center bg-gray-50 dark:bg-gray-900">
+        <main className="w-full h-fit flex items-center bg-gray-50 dark:bg-gray-900">
             <section className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                 <div className="mx-auto max-w-screen-sm text-center">
                     <p className="mb-4 text-3xl tracking-tight font-bold text-gray-900 md:text-4xl dark:text-gray-200">
@@ -24,4 +25,4 @@ const LetterOutCreate: FC = () => {
     );
 };
 
-export default LetterOutCreate;
+export default withAuth(QRGenerator);

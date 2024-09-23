@@ -2,7 +2,7 @@ import axios from 'axios';
 import {getToken, logoutUser} from '@/storage/auth';
 
 const client = axios.create({
-    baseURL: "http://localhost:8000",
+    baseURL: "https://api.sparti.online",
     timeout: 60000,
 });
 

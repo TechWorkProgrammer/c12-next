@@ -10,7 +10,7 @@ interface DisposisiCheckboxListProps {
 
 const DisposisiCheckboxList: React.FC<DisposisiCheckboxListProps> = ({ disposisiList, selectedDisposisi, onChange }) => {
     return (
-        <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-2">
             {disposisiList.map((disposisi) => (
                 <Checkbox
                     key={disposisi.uuid}

@@ -12,7 +12,9 @@ export const useTranslation = () => {
             return key;
         }
 
-        const keys = key.split(':');
+        const formattedKey = key.toLowerCase().replace(/\s+/g, '_');
+        const keys = formattedKey.split(':');
+
         let value = translations[language];
         for (const k of keys) {
             if (value && typeof value === 'object') {
@@ -21,6 +23,7 @@ export const useTranslation = () => {
                 break;
             }
         }
-        return typeof value === 'string' ? value : "key:" + key;
+
+        return typeof value === 'string' ? value : "key:" + formattedKey;
     }
 };

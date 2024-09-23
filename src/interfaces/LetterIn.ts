@@ -1,7 +1,7 @@
 import {User, UserStatus} from "@/interfaces/User";
 import {TimeStamp} from "@/interfaces/TimeStamp";
 
-export interface DetailLetterIn extends TimeStamp {
+export interface LetterIn extends TimeStamp {
     file_surat: string;
     nomor_surat: string;
     klasifikasi_surat: Klasifikasi;
@@ -15,22 +15,22 @@ export interface DetailLetterIn extends TimeStamp {
 }
 
 export interface addLetterIn {
-    file_surat: File | null;
+    file_surat: File | string | null;
     klasifikasi_surat: Klasifikasi;
-    tanggal_surat: string | null;
+    tanggal_surat: string;
     pengirim: string;
     perihal: string;
     penerima: User;
 }
 
-export interface DetailLetterIn extends DetailLetterIn {
+export interface DetailLetterIn extends LetterIn {
     disposisi: Disposisi | null;
     log_status: UserStatus[];
 }
 
 export interface Disposisi extends TimeStamp {
     disposisi_asal: null;
-    isi_disposisi: IsiDisposisi[];
+    isi_disposisis: IsiDisposisi[];
     catatan: string;
     tanda_tangan: string
     creator: User;
@@ -40,7 +40,7 @@ export interface Disposisi extends TimeStamp {
 
 export interface DisposisiLevel2 extends TimeStamp {
     disposisi_asal: Disposisi | null;
-    isi_disposisi: IsiDisposisi[];
+    isi_disposisis: IsiDisposisi[];
     catatan: string;
     tanda_tangan: string;
     creator: User;
@@ -50,7 +50,7 @@ export interface DisposisiLevel2 extends TimeStamp {
 
 export interface DisposisiLevel3 extends TimeStamp {
     disposisi_asal: DisposisiLevel2 | null;
-    isi_disposisi: IsiDisposisi[];
+    isi_disposisis: IsiDisposisi[];
     catatan: string;
     tanda_tangan: string;
     creator: User;
@@ -63,11 +63,6 @@ export interface LogDisposisi extends TimeStamp {
     penerima: string;
     disposisi_id: string;
     penerima_user: User;
-}
-
-export interface UserWithRead extends User {
-    read_at: string | null;
-    pelaksanaan_at: string | null;
 }
 
 export interface Klasifikasi extends TimeStamp {

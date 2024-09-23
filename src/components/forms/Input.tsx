@@ -19,7 +19,7 @@ const Input: FC<InputProps> = ({
                                    type = 'text',
                                    placeholder,
                                    required,
-                                   value,
+                                   value = '',
                                    onChange,
                                    disabled = false,
                                }) => {

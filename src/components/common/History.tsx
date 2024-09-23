@@ -10,7 +10,7 @@ import Input from "@/components/forms/Input";
 import html2canvas from 'html2canvas';
 import JsPDF from 'jspdf';
 import {generateQRCode} from "@/utils/QRCode";
-import {generateDispositionHTML} from "@/utils/generateDispositionHTML";
+import {useGenerateDispositionHTML} from "@/utils/useGenerateDispositionHTML";
 import DownloadButton from "@/components/badges/DownloadButton";
 
 const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
@@ -18,20 +18,22 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
     const [filterPerson, setFilterPerson] = useState('all');
     const [showRecipients, setShowRecipients] = useState<Record<string, boolean>>({});
     const [selectedDisposition, setSelectedDisposition] = useState<Disposisi | DisposisiLevel2 | DisposisiLevel3 | null>(null);
-    const [selectedStatus, setSelectedStatus] = useState<string>('');
     const [qrCodeUrl, setQrCodeUrl] = useState<string>('');
+    const [selectedLevel, setSelectedLevel] = useState<string>('');
     const dateFormat = useDateFormatter();
+    const htmlGenerator = useGenerateDispositionHTML();
 
     const generatePDF = async () => {
         if (selectedDisposition) {
-            const htmlContent = generateDispositionHTML(letter, selectedDisposition, selectedStatus, qrCodeUrl);
+            const kopSuratUrl = '/default.png';
+            const htmlContent = htmlGenerator(letter, selectedDisposition, selectedLevel, qrCodeUrl, dateFormat(selectedDisposition.created_at), kopSuratUrl);
 
             const tempContainer = document.createElement('div');
             tempContainer.innerHTML = htmlContent;
             document.body.appendChild(tempContainer);
 
             const canvas = await html2canvas(tempContainer, {
-                scale: 2,
+                scale: 5,
                 useCORS: true,
             });
 
@@ -39,10 +41,22 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
 
             const imgData = canvas.toDataURL('image/png');
             const pdf = new JsPDF('p', 'mm', 'a4');
-            const imgWidth = 210 - 20;
+            const imgWidth = 210;
+            const pageHeight = 297;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
 
-            pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft > 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
             pdf.save(`${selectedDisposition?.creator.name || 'disposition'}.pdf`);
         }
     };
@@ -96,13 +110,14 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
             description: `${creator.name} mengirim surat kepada ${penerima.name}.`,
             level: 'Penurunan Surat',
             recipients: [penerima],
-            dispoisi: [],
+            disposisi: null,
         },
         ...(disposisi ? gatherDispositions(disposisi).map(({level, disposisi}) => ({
             type: 'disposisi',
             date: disposisi.created_at,
             description: `${level} dibuat oleh ${disposisi.creator.name}, diterima oleh ${disposisi.log_disposisis.length} orang.`,
             level,
+            disposisi,
             recipients: extractRecipients(disposisi.log_disposisis),
         })) : []),
     ];
@@ -118,10 +133,9 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
         ? actions
         : actions.filter(action => action.recipients.some(p => p.name === filterPerson));
 
-    const handleStatusClick = (disposisi: Disposisi | DisposisiLevel2 | DisposisiLevel3 | any, status: string) => {
-        console.log(disposisi);
+    const handleStatusClick = (disposisi: Disposisi | DisposisiLevel2 | DisposisiLevel3 | any, level : string) => {
         setSelectedDisposition(disposisi);
-        setSelectedStatus(status);
+        setSelectedLevel(level)
     };
 
     return (
@@ -161,6 +175,13 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
                             className="text-sm text-blue-600 dark:text-blue-400 cursor-pointer hover:underline">
                             Lihat Penerima
                         </span>
+                        {action.disposisi != null && (
+                            <span
+                                onClick={() => handleStatusClick(action.disposisi, action.level)}
+                                className="text-sm px-2 text-blue-600 dark:text-blue-400 cursor-pointer hover:underline">
+                                Lihat Surat Disposisi
+                            </span>
+                        )}
                         {showRecipients[action.level] && (
                             <ul className="ml-6 mt-2">
                                 {action.recipients.map((p) => {
@@ -171,14 +192,13 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
                                             <div className="flex flex-row justify-start items-center gap-2">
                                                 <StatusBadge
                                                     status={status}
-                                                    onClick={() => handleStatusClick(action, status)}
                                                 />
                                                 <span className="text-sm text-gray-800 dark:text-gray-300">
                                                     {p.name}
                                                 </span>
                                             </div>
                                             <span className="text-xs text-gray-500 dark:text-gray-300">
-                                               {date && dateFormat(date)}
+                                                {date && dateFormat(date)}
                                             </span>
                                         </li>
                                     );
@@ -195,10 +215,10 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
                     isOpen={!!selectedDisposition}
                     onClose={() => setSelectedDisposition(null)}
                 >
-                    <div className="max-h-[70vh] overflow-auto min-w-96">
+                    <div className="max-h-[70vh] overflow-auto w-fit min-w-80">
                         <div className="space-y-4">
                             <div className="flex flex-row justify-between mb-2">
-                                <StatusBadge status={selectedStatus}/>
+                                <StatusBadge status={selectedLevel} />
                                 <DownloadButton fileUrl={''} fileName={''} onGeneratePDF={generatePDF}/>
                             </div>
                             <Input
@@ -221,7 +241,7 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
                                 rows={3}
                                 label="Isi Disposisi"
                                 disabled={true}
-                                value={selectedDisposition.isi_disposisi.map(isi => isi.isi).join(', ')}
+                                value={selectedDisposition.isi_disposisis.map(isi => isi.isi).join(', ')}
                             />
                             <div className="mt-4">
                                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">

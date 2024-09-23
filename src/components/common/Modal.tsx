@@ -11,7 +11,7 @@ const Modal: FC<ModalProps> = ({label = null, isOpen, onClose, children}) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-40 flex items-center justify-center">
             <div
                 className="rounded-lg overflow-hidden shadow-xl max-w-screen-md border border-gray-300 bg-gray-50 dark:bg-gray-800 dark:border-gray-600">
                 <div className="flex justify-between p-2 pt-4">

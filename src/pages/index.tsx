@@ -40,21 +40,47 @@ const Home: React.FC = () => {
         const query = event.target.value.toLowerCase();
         setSearchQuery(query);
 
+        if (query === "") {
+            setFilteredFaqs(faqs.slice(0, 2));
+            return;
+        }
+
         setLoading(true);
         setTimeout(() => {
-            if (query.trim() === "") {
-                setFilteredFaqs(faqs.slice(0, 2));
-            } else {
-                const matchingFaqs = faqs.filter(
-                    (faq) =>
-                        faq.question.toLowerCase().includes(query) ||
-                        faq.answer.toLowerCase().includes(query)
-                );
-                setFilteredFaqs(matchingFaqs);
+            const keywords = query.split(/\s+/);
+
+            const matchingFaqs = faqs
+                .map((faq) => {
+                    const questionWords = faq.question.toLowerCase();
+                    const answerWords = faq.answer.toLowerCase();
+
+                    const matchCount = keywords.reduce((count, keyword) => {
+                        if (questionWords.includes(keyword) || answerWords.includes(keyword)) {
+                            return count + 1;
+                        }
+                        return count;
+                    }, 0);
+
+                    return { ...faq, matchCount };
+                })
+                .filter(faq => faq.matchCount > 0)
+                .sort((a, b) => b.matchCount - a.matchCount);
+
+            if (matchingFaqs.length > 1) {
+                const highestMatchCount = matchingFaqs[0].matchCount;
+                const secondMatchCount = matchingFaqs[1].matchCount;
+
+                if (secondMatchCount < highestMatchCount * 0.5) {
+                    setFilteredFaqs(matchingFaqs.slice(0, 1));
+                } else {
+                    setFilteredFaqs(matchingFaqs.slice(0, 2));
+                }
             }
+
             setLoading(false);
         }, 1000);
     };
+
 
     return (
         <div className="relative">

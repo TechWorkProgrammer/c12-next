@@ -19,7 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
 
     const handleLogout = () => {
         alert.warning(
-            "Apakah Anda yakin ingin logout?",
+            text('message:logout_confirmation'),
             false,
             () => {
                 executeLogout().then();
@@ -31,9 +31,9 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
         setLoading(true);
         try {
             await logoutUser();
-            alert.success("Kamu berhasil logout");
-        } catch (error) {
-            alert.danger(error.message || 'Gagal logout, silakan coba lagi.');
+            alert.success(text('message:logout_success'));
+        } catch (error: any) {
+            alert.danger(error.message || text('message:logout_failed'));
         } finally {
             setLoading(false);
         }
@@ -161,6 +161,32 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
                                 <span
                                     className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
                                     {text('management')}
+                                </span>
+                            </Link>
+                        </li>
+                    )}
+                    {user && (
+                        <li>
+                            <Link
+                                href="/qr"
+                                className="flex items-center p-2 text-base font-normal text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                            >
+                                <svg
+                                    className="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                                    aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path stroke="currentColor" strokeLinejoin="round" strokeWidth="2"
+                                          d="M4 4h6v6H4V4Zm10 10h6v6h-6v-6Zm0-10h6v6h-6V4Zm-4 10h.01v.01H10V14Zm0 4h.01v.01H10V18Zm-3 2h.01v.01H7V20Zm0-4h.01v.01H7V16Zm-3 2h.01v.01H4V18Zm0-4h.01v.01H4V14Z"/>
+                                    <path stroke="currentColor" strokeLinejoin="round" strokeWidth="2"
+                                          d="M7 7h.01v.01H7V7Zm10 10h.01v.01H17V17Z"/>
+                                </svg>
+
+                                <span
+                                    className="ml-3 text-gray-900 dark:text-white group-hover:text-gray-900 dark:group-hover:text-white">
+                                    {text('qr_generator')}
                                 </span>
                             </Link>
                         </li>

@@ -1,16 +1,25 @@
 import React, { useRef, useState } from 'react';
 import Modal from '@/components/common/Modal';
 import Button from '@/components/common/Button';
+import { User } from '@/interfaces/User';
+import { useAlert } from '@/contexts/AlertContext';
+import client from '@/api/client';
 
 interface SignatureModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onSignatureSubmit: (file: File | null) => void;
+    selectedUsers: User[];
+    selectedDisposisi: string[];
+    note: string;
+    letter: any;
+    parentDisposisi?: any;
 }
 
-const SignatureModal: React.FC<SignatureModalProps> = ({ isOpen, onClose, onSignatureSubmit }) => {
+const SignatureModal: React.FC<SignatureModalProps> = ({ isOpen, onClose, selectedUsers, selectedDisposisi, note, letter, parentDisposisi }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [isDrawing, setIsDrawing] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const alert = useAlert();
 
     const startDrawing = (event: React.MouseEvent | React.TouchEvent) => {
         const canvas = canvasRef.current;
@@ -55,16 +64,47 @@ const SignatureModal: React.FC<SignatureModalProps> = ({ isOpen, onClose, onSign
         if (ctx) ctx.clearRect(0, 0, canvas.width, canvas.height);
     };
 
-    const handleSaveSignature = () => {
+    const handleSaveSignature = async () => {
         const canvas = canvasRef.current;
-        if (!canvas) return;
+        if (!canvas) {
+            alert.warning('Canvas not available.');
+            return;
+        }
+        setIsProcessing(true);
+        await new Promise<void>((resolve) => {
+            canvas.toBlob(async (blob) => {
+                if (!blob) {
+                    alert.warning('Please provide a signature before submitting.');
+                    setIsProcessing(false);
+                    return;
+                }
 
-        canvas.toBlob((blob) => {
-            if (blob) {
-                const file = new File([blob], 'signature.png', { type: 'image/png' });
-                onSignatureSubmit(file);
-                onClose();
-            }
+                try {
+                    const file = new File([blob], 'signature.png', { type: 'image/png' });
+
+                    const formData = new FormData();
+                    formData.append('catatan', note);
+                    formData.append('tanda_tangan', file);
+                    selectedDisposisi.forEach((id) => formData.append('isi_disposisi_id[]', id));
+                    selectedUsers.forEach((user) => formData.append('penerima[]', user.uuid));
+
+                    const url = parentDisposisi
+                        ? `/surat-masuk/${letter?.uuid}/disposisi/${parentDisposisi.uuid}`
+                        : `/surat-masuk/${letter?.uuid}/disposisi`;
+
+                    await client.post(url, formData);
+
+                    alert.success('Disposition successfully created with signature.');
+                    onClose();
+                } catch (error) {
+                    alert.warning('Failed to create disposition. Please try again.');
+                    onClose();
+                } finally {
+                    setIsProcessing(false);
+                }
+
+                resolve();
+            });
         });
     };
 
@@ -85,8 +125,12 @@ const SignatureModal: React.FC<SignatureModalProps> = ({ isOpen, onClose, onSign
                     onTouchEnd={stopDrawing}
                 />
                 <div className="flex justify-end gap-2 w-full">
-                    <Button label="Bersihkan" onClick={clearCanvas} variant="secondary" />
-                    <Button label="Buat Disposisi" onClick={handleSaveSignature} />
+                    <Button label="Bersihkan" onClick={clearCanvas}/>
+                    <Button
+                        label={isProcessing ? "Processing..." : "Buat Disposisi"}
+                        onClick={handleSaveSignature}
+                        disabled={isProcessing}
+                    />
                 </div>
             </div>
         </Modal>

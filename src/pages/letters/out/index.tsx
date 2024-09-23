@@ -17,7 +17,7 @@ const LettersOut: React.FC = () => {
     const user = getCurrentUser();
     return (
         <section className="antialiased">
-            {user.role == 'Pelaksana' || 'External' && (<FloatingButton onClick={handleCreate}/>)}
+            {user.role == 'Pelaksana' || user.role == 'External' && (<FloatingButton onClick={handleCreate}/>)}
             <div className="max-w-screen-xl mx-auto">
                 <h1 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">{text('letters_out')}</h1>
             </div>
@@ -29,4 +29,4 @@ const LettersOut: React.FC = () => {
     );
 };
 
-export default withAuth(LettersOut, ["Tata usaha", "Pejabat", "Pelaksana", "External"]);
+export default withAuth(LettersOut, ["Tata Usaha", "Pejabat", "Pelaksana", "External"]);

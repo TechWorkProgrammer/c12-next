@@ -24,8 +24,8 @@ const Settings: React.FC = () => {
 
     const languageOptions = [
         {label: 'English', value: 'en'},
-        {label: 'Bahasa Indonesia', value: 'id'},
-        {label: 'Basa Jawa', value: 'jv'}
+        {label: 'Bahasa Indonesia (Beta)', value: 'id'},
+        {label: 'Basa Jawa (Beta)', value: 'jv'}
     ];
 
     const fontOptions = [
@@ -42,16 +42,6 @@ const Settings: React.FC = () => {
     return (
         <>
             <h1 className="text-xl font-semibold text-gray-700 dark:text-gray-300">{text('settings')}</h1>
-            {user && (
-                <div className="my-4 ">
-                    <fieldset
-                        className="relative w-full border border-gray-300 rounded-lg dark:border-gray-600 p-4 flex flex-col gap-4">
-                        <legend className="mx-2 px-1 text-sm font-bold text-gray-500 dark:text-gray-400">
-                            {text('account')}
-                        </legend>
-                    </fieldset>
-                </div>
-            )}
             <div className="my-4 ">
                 <fieldset
                     className="relative w-full border border-gray-300 rounded-lg dark:border-gray-600 p-4 flex flex-col gap-4">
@@ -74,7 +64,7 @@ const Settings: React.FC = () => {
                         label={text('sidebar_position')}
                         value={sidebarPosition}
                         options={sidebarPositionOptions}
-                        onChange={(value) => toggleSidebarPosition(value)}
+                        onChange={(value) => toggleSidebarPosition(value as 'left' | 'right')}
                     />
                 </fieldset>
             </div>
@@ -92,6 +82,16 @@ const Settings: React.FC = () => {
                     />
                 </fieldset>
             </div>
+            {user && (
+                <div className="my-4 ">
+                    <fieldset
+                        className="relative w-full border border-gray-300 rounded-lg dark:border-gray-600 p-4 flex flex-col gap-4">
+                        <legend className="mx-2 px-1 text-sm font-bold text-gray-500 dark:text-gray-400">
+                            {text('account')}
+                        </legend>
+                    </fieldset>
+                </div>
+            )}
         </>
     );
 };

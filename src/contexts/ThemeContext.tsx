@@ -4,7 +4,7 @@ interface ThemeContextType {
     theme: string;
     toggleTheme: (theme: string) => void;
     sidebarPosition: 'left' | 'right';
-    toggleSidebarPosition: (position: string) => void;
+    toggleSidebarPosition: (position: 'left' | 'right') => void;
     fontFamily: string;
     toggleFontFamily: (font: string) => void;
 }
