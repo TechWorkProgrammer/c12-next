@@ -107,7 +107,7 @@
     "logout_confirmation": "Are you sure you want to log out?",
     "logout_failed": "Logout failed. Please try again.",
     "logout_success": "You have successfully logged out.",
-    "mark_as_executed": "Mark as Executed?",
+    "mark_as_executed": "Mark as Executed",
     "marked_as_executed": "Marked as Executed",
     "not_found": "Sorry, what you were looking for was not found",
     "remove_file_confirmation": "Are you sure you want to delete this file?",
@@ -141,5 +141,8 @@
   "note": "Note",
   "disposisi_1": "Disposition 1",
   "disposisi_2": "Disposition 2",
-  "disposisi_3": "Disposition 3"
+  "disposisi_3": "Disposition 3",
+  "segera": "Immediately",
+  "rahasia": "Secret",
+  "biasa": "Regular"
 }

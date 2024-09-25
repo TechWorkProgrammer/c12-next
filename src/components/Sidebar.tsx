@@ -31,9 +31,9 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
         setLoading(true);
         try {
             await logoutUser();
-            alert.success(text('message:logout_success'));
+            alert.success(text('message:logout_success'), false);
         } catch (error: any) {
-            alert.danger(error.message || text('message:logout_failed'));
+            alert.danger(error.message || text('message:logout_failed'), false);
         } finally {
             setLoading(false);
         }

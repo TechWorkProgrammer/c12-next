@@ -2,7 +2,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 
 interface LoadingContextType {
-    setLoading: (state: boolean) => void;
+    loader: (state: boolean) => void;
 }
 
 const LoadingContext = createContext<LoadingContextType | undefined>(undefined);
@@ -12,20 +12,30 @@ export const useLoader = () => {
     if (!context) {
         throw new Error('useLoader must be used within a LoadingProvider');
     }
-    return context.setLoading;
+    return context.loader;
 };
 
 const LoadingProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
     const [isLoading, setIsLoading] = useState(false);
+    const [manualLoading, setManualLoading] = useState(false);
     const router = useRouter();
 
-    const setLoading = (state: boolean) => {
+    const loader = (state: boolean) => {
+        setManualLoading(state);
         setIsLoading(state);
     };
 
     useEffect(() => {
-        const handleStart = () => setLoading(true);
-        const handleComplete = () => setLoading(false);
+        const handleStart = () => {
+            if (!manualLoading) {
+                setIsLoading(true);
+            }
+        };
+        const handleComplete = () => {
+            if (!manualLoading) {
+                setIsLoading(false);
+            }
+        };
 
         router.events.on('routeChangeStart', handleStart);
         router.events.on('routeChangeComplete', handleComplete);
@@ -36,10 +46,10 @@ const LoadingProvider: React.FC<{ children: React.ReactNode }> = ({children}) =>
             router.events.off('routeChangeComplete', handleComplete);
             router.events.off('routeChangeError', handleComplete);
         };
-    }, [router]);
+    }, [router, manualLoading]);
 
     return (
-        <LoadingContext.Provider value={{setLoading}}>
+        <LoadingContext.Provider value={{loader}}>
             {isLoading && (
                 <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
                     <div role="status" className="absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2">

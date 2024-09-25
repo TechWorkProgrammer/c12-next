@@ -1,24 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from "@/components/common/Button";
 import TextArea from "@/components/forms/TextArea";
 import Select from "@/components/forms/Select";
 import Modal from '@/components/common/Modal';
 import SignatureModal from '@/components/common/SignatureModal';
-import { DetailLetterIn, Disposisi, DisposisiLevel2, IsiDisposisi } from '@/interfaces/LetterIn';
-import { User } from "@/interfaces/User";
+import {DetailLetterIn, Disposisi, DisposisiLevel2, IsiDisposisi} from '@/interfaces/LetterIn';
+import {User} from "@/interfaces/User";
 import UserSelection from '@/components/common/UserSelection';
 import DisposisiCheckboxList from '@/components/common/DisposisiCheckboxList';
 import client from '@/api/client';
-import { useAlert } from "@/contexts/AlertContext";
+import {useAlert} from "@/contexts/AlertContext";
 import Skeleton from '@/components/common/Skeleton';
+import {useTranslation} from "@/utils/useTranslation";
 
 interface DisposisiModalProps {
     onClose: () => void;
     letter: DetailLetterIn | null;
     parentDisposisi?: Disposisi | DisposisiLevel2 | null;
+    level: string;
 }
 
-const DisposisiModal: React.FC<DisposisiModalProps> = ({ onClose, letter, parentDisposisi }) => {
+const DisposisiModal: React.FC<DisposisiModalProps> = ({onClose, letter, parentDisposisi = null, level = ''}) => {
     const [note, setNote] = useState('');
     const [showSignatureModal, setShowSignatureModal] = useState(false);
     const [users, setUsers] = useState<User[]>([]);
@@ -27,6 +29,7 @@ const DisposisiModal: React.FC<DisposisiModalProps> = ({ onClose, letter, parent
     const [selectedDisposisi, setSelectedDisposisi] = useState<string[]>([]);
     const [isLoadingData, setIsLoadingData] = useState(true);
     const alert = useAlert();
+    const text = useTranslation();
 
     useEffect(() => {
         const fetchDisposisiData = async () => {
@@ -65,10 +68,12 @@ const DisposisiModal: React.FC<DisposisiModalProps> = ({ onClose, letter, parent
     };
 
     return (
-        <Modal label="Form Disposisi" isOpen={true} onClose={onClose}>
+        <Modal label={level != '' ? text('next_from') + ' ' + text(level) : text('create_new_disposition')}
+               isOpen={true}
+               onClose={onClose}>
             {isLoadingData ? (
                 <div className="flex flex-col gap-2 w-full min-w-[20rem] max-w-screen-xl">
-                    <Skeleton />
+                    <Skeleton/>
                 </div>
             ) : (
                 <div className="flex flex-col gap-2 w-full min-w-[20rem] max-w-screen-xl max-h-[70vh] overflow-y-auto">
@@ -86,7 +91,7 @@ const DisposisiModal: React.FC<DisposisiModalProps> = ({ onClose, letter, parent
                         onChange={(value) => handlePersonChange(Array.isArray(value) ? value : value)}
                         value=""
                     />
-                    <UserSelection selectedUsers={selectedUsers} onRemove={handleRemoveUser} />
+                    <UserSelection selectedUsers={selectedUsers} onRemove={handleRemoveUser}/>
                     <TextArea
                         label="Catatan"
                         rows={3}

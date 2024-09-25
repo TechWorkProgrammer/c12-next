@@ -182,7 +182,7 @@ const LettersIn: React.FC = () => {
                                             <ClassificationBadge classification={item.klasifikasi_surat.name}/>
                                             <StatusBadge status={getStatus(item)}/>
                                         </div>
-                                        <DownloadButton fileName={item.file_surat} fileUrl={item.file_surat}/>
+                                        <DownloadButton fileName={item.nomor_surat} fileUrl={item.file_surat}/>
                                     </div>
                                     <FileDisplay fileName={item.file_surat} label={item.nomor_surat}/>
                                     <h1 className="text-sm text-gray-500 dark:text-gray-500 mt-2">

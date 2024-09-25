@@ -1,12 +1,14 @@
 import {useLanguage} from '@/contexts/LanguageContext';
 
 export const useDateFormatter = () => {
-    const { language } = useLanguage();
-    const locale = language === 'en' ? 'en-US' : 'id-ID';
+    const {language} = useLanguage();
 
-    return (date: Date | string | undefined | null): string => {
+    return (date: Date | string | undefined | null, locale: string | null = null): string => {
         if (!date) {
             return language === 'en' ? 'Date not found' : 'Tanggal tidak ditemukan';
+        }
+        if (!locale){
+            locale = language === 'en' ? 'en-US' : 'id-ID';
         }
 
         const dateObj = typeof date === 'string' ? new Date(date) : date;
@@ -27,7 +29,6 @@ export const useDateFormatter = () => {
             options.hour = '2-digit';
             options.minute = '2-digit';
         }
-
         return new Intl.DateTimeFormat(locale, options).format(dateObj);
     };
 };

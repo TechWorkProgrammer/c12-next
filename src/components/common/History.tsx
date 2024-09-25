@@ -3,15 +3,16 @@ import {useDateFormatter} from '@/utils/useDateFormatter';
 import Select from "@/components/forms/Select";
 import StatusBadge from "@/components/badges/StatusBadge";
 import {DetailLetterIn, Disposisi, DisposisiLevel2, DisposisiLevel3, LogDisposisi} from "@/interfaces/LetterIn";
-import Modal from '@/components/common/Modal';
 import Viewer from '@/components/common/Viewer';
 import TextArea from "@/components/forms/TextArea";
 import Input from "@/components/forms/Input";
-import html2canvas from 'html2canvas';
-import JsPDF from 'jspdf';
 import {generateQRCode} from "@/utils/QRCode";
-import {useGenerateDispositionHTML} from "@/utils/useGenerateDispositionHTML";
 import DownloadButton from "@/components/badges/DownloadButton";
+import DispositionPage from "@/components/common/DispositionPage";
+import {createRoot} from "react-dom/client";
+import {useLoader} from "@/contexts/LoadingContext";
+import {useAlert} from "@/contexts/AlertContext";
+import Modal from "@/components/common/Modal";
 
 const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
     const {disposisi, creator, penerima, log_status} = letter;
@@ -21,43 +22,48 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
     const [qrCodeUrl, setQrCodeUrl] = useState<string>('');
     const [selectedLevel, setSelectedLevel] = useState<string>('');
     const dateFormat = useDateFormatter();
-    const htmlGenerator = useGenerateDispositionHTML();
+    const loader = useLoader();
+    const alert = useAlert();
 
     const generatePDF = async () => {
         if (selectedDisposition) {
-            const kopSuratUrl = '/default.png';
-            const htmlContent = htmlGenerator(letter, selectedDisposition, selectedLevel, qrCodeUrl, dateFormat(selectedDisposition.created_at), kopSuratUrl);
+            loader(true);
+            try {
+                const kopSuratUrl = '/default.png';
+                const html2pdf = (await import('html2pdf.js')).default;
+                const tempContainer = document.createElement('div');
+                document.body.appendChild(tempContainer);
 
-            const tempContainer = document.createElement('div');
-            tempContainer.innerHTML = htmlContent;
-            document.body.appendChild(tempContainer);
+                const options = {
+                    margin: 1,
+                    filename: `${letter.nomor_surat + '-' + selectedDisposition?.creator.name || 'disposition'}.pdf`,
+                    image: {type: 'jpeg', quality: 0.98},
+                    html2canvas: {scale: 2, useCORS: true},
+                    jsPDF: {unit: 'mm', format: 'a4', orientation: 'portrait'},
+                };
 
-            const canvas = await html2canvas(tempContainer, {
-                scale: 5,
-                useCORS: true,
-            });
+                const root = createRoot(tempContainer);
+                root.render(
+                    <DispositionPage
+                        letter={letter}
+                        disposition={selectedDisposition}
+                        status={selectedLevel}
+                        qrCodeUrl={qrCodeUrl}
+                        date={dateFormat(selectedDisposition.created_at, 'id-ID')}
+                        kopSuratUrl={kopSuratUrl}
+                    />
+                );
+                await new Promise((resolve) => setTimeout(resolve, 1000));
 
-            document.body.removeChild(tempContainer);
+                await html2pdf().from(tempContainer).set(options).save();
 
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new JsPDF('p', 'mm', 'a4');
-            const imgWidth = 210;
-            const pageHeight = 297;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
-
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-
-            while (heightLeft > 0) {
-                position = heightLeft - imgHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
+                document.body.removeChild(tempContainer);
+                alert.success('Generate PDF Success, check it on download menu');
+            } catch (error: any) {
+                alert.danger('Failed to generate PDF:', error);
+            } finally {
+                loader(false);
             }
-
-            pdf.save(`${selectedDisposition?.creator.name || 'disposition'}.pdf`);
         }
     };
 
@@ -69,10 +75,10 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
         }
     }, [selectedDisposition]);
 
-    const toggleRecipients = (levelUuid: string) => {
+    const toggleRecipients = (idx: string) => {
         setShowRecipients((prev) => ({
             ...prev,
-            [levelUuid]: !prev[levelUuid],
+            [idx]: !prev[idx],
         }));
     };
 
@@ -133,9 +139,21 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
         ? actions
         : actions.filter(action => action.recipients.some(p => p.name === filterPerson));
 
-    const handleStatusClick = (disposisi: Disposisi | DisposisiLevel2 | DisposisiLevel3 | any, level : string) => {
+    const groupByLevel = (actions: any[]) => {
+        return actions.reduce((grouped, action) => {
+            if (!grouped[action.level]) {
+                grouped[action.level] = [];
+            }
+            grouped[action.level].push(action);
+            return grouped;
+        }, {} as Record<string, any[]>);
+    };
+
+    const groupedActions = groupByLevel(filteredActions);
+
+    const handleStatusClick = (disposisi: Disposisi | DisposisiLevel2 | DisposisiLevel3, level: string) => {
         setSelectedDisposition(disposisi);
-        setSelectedLevel(level)
+        setSelectedLevel(level);
     };
 
     return (
@@ -150,61 +168,68 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
                 />
             </div>
             <ol className="relative border-s border-gray-300 dark:border-gray-700 mx-2 lg:mx-8">
-                {filteredActions.map((action, index) => (
+                {(Object.entries(groupedActions) as [string, any[]][]).map(([level, actionsInGroup], index) => (
                     <li key={index} className="mb-6 ms-6">
                         <span
                             className="absolute -start-2.5 mt-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-blue-100 ring-8 ring-white dark:bg-blue-900 dark:ring-gray-800">
                             <svg className="h-3 w-3 text-green-800 dark:text-green-300" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"
-                                      strokeWidth="2" d="M5 11.917 9.724 16.5 19 7.5"/>
+                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                      d="M5 11.917 9.724 16.5 19 7.5"/>
                             </svg>
                         </span>
                         <span
                             className="inline-flex items-center rounded bg-green-100 px-2.5 py-0.5 text-xs font-bold text-green-800 dark:bg-blue-900 dark:text-green-100">
-                            {action.level}
+                            {level}
                         </span>
-                        <p className="text-base lg:text-sm font-semibold text-gray-800 dark:text-gray-300 mt-1">
-                            {action.description}
-                        </p>
-                        <p className="text-sm text-gray-800 dark:text-gray-500">
-                            {dateFormat(action.date)}
-                        </p>
-                        <span
-                            onClick={() => toggleRecipients(action.level)}
-                            className="text-sm text-blue-600 dark:text-blue-400 cursor-pointer hover:underline">
-                            Lihat Penerima
-                        </span>
-                        {action.disposisi != null && (
-                            <span
-                                onClick={() => handleStatusClick(action.disposisi, action.level)}
-                                className="text-sm px-2 text-blue-600 dark:text-blue-400 cursor-pointer hover:underline">
-                                Lihat Surat Disposisi
-                            </span>
-                        )}
-                        {showRecipients[action.level] && (
-                            <ul className="ml-6 mt-2">
-                                {action.recipients.map((p) => {
-                                    const {status, date} = getDispositionStatus(p.uuid);
-                                    return (
-                                        <li key={p.uuid}
-                                            className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2 mb-1">
-                                            <div className="flex flex-row justify-start items-center gap-2">
-                                                <StatusBadge
-                                                    status={status}
-                                                />
-                                                <span className="text-sm text-gray-800 dark:text-gray-300">
-                                                    {p.name}
-                                                </span>
-                                            </div>
-                                            <span className="text-xs text-gray-500 dark:text-gray-300">
-                                                {date && dateFormat(date)}
-                                            </span>
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-                        )}
+                        {actionsInGroup.map((action: any, idx: number) => {
+                            const uniqueIdx = index + '-' + idx;
+                            return (
+                                <div key={uniqueIdx} className="mt-2">
+                                    <p className="text-base lg:text-sm font-semibold text-gray-800 dark:text-gray-300 mt-1">
+                                        {action.description}
+                                    </p>
+                                    <p className="text-sm text-gray-800 dark:text-gray-500">
+                                        {dateFormat(action.date)}
+                                    </p>
+                                    <span
+                                        onClick={() => toggleRecipients(uniqueIdx)}
+                                        className="text-sm text-blue-600 dark:text-blue-400 cursor-pointer hover:underline"
+                                    >
+                                        Lihat Penerima
+                                    </span>
+                                    {action.disposisi && (
+                                        <span
+                                            onClick={() => handleStatusClick(action.disposisi, action.level)}
+                                            className="text-sm px-2 text-blue-600 dark:text-blue-400 cursor-pointer hover:underline"
+                                        >
+                                            Lihat Surat Disposisi
+                                        </span>
+                                    )}
+                                    {showRecipients[uniqueIdx] && (
+                                        <ul className="ml-6 mt-2">
+                                            {action.recipients.map((p: any) => {
+                                                const {status, date} = getDispositionStatus(p.uuid);
+                                                return (
+                                                    <li key={p.uuid}
+                                                        className="flex flex-col md:flex-row justify-start items-start md:items-center gap-2 mb-1">
+                                                        <div className="flex flex-row justify-start items-center gap-2">
+                                                            <StatusBadge status={status}/>
+                                                            <span className="text-sm text-gray-800 dark:text-gray-300">
+                                                                {p.name}
+                                                            </span>
+                                                        </div>
+                                                        <span className="text-xs text-gray-500 dark:text-gray-300">
+                                                            {date && dateFormat(date)}
+                                                        </span>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </li>
                 ))}
             </ol>
@@ -215,10 +240,10 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
                     isOpen={!!selectedDisposition}
                     onClose={() => setSelectedDisposition(null)}
                 >
-                    <div className="max-h-[70vh] overflow-auto w-fit min-w-80">
+                    <div className="max-h-[70vh] overflow-auto w-lvw min-w-80 max-w-lg">
                         <div className="space-y-4">
                             <div className="flex flex-row justify-between mb-2">
-                                <StatusBadge status={selectedLevel} />
+                                <StatusBadge status={selectedLevel}/>
                                 <DownloadButton fileUrl={''} fileName={''} onGeneratePDF={generatePDF}/>
                             </div>
                             <Input
@@ -241,7 +266,7 @@ const History: React.FC<{ letter: DetailLetterIn }> = ({letter}) => {
                                 rows={3}
                                 label="Isi Disposisi"
                                 disabled={true}
-                                value={selectedDisposition.isi_disposisis.map(isi => isi.isi).join(', ')}
+                                value={selectedDisposition.isi_disposisis.map(isi => isi.isi_disposisi.isi).join(', ')}
                             />
                             <div className="mt-4">
                                 <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">

@@ -32,6 +32,7 @@ const LetterInCreate: FC = () => {
     const [users, setUsers] = useState<User[]>([]);
     const [classifications, setClassifications] = useState<Klasifikasi[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [isSubmiting, setIsSubmiting] = useState(false);
 
     useEffect(() => {
         const fetchInitialData = async () => {
@@ -85,8 +86,10 @@ const LetterInCreate: FC = () => {
 
     const handleSubmit = async () => {
         loading(true);
+        setIsSubmiting(true);
         if (!letterData.file_surat) {
             loading(false);
+            setIsSubmiting(false);
             alert.danger(text('message:upload_file_prompt'));
             return;
         }
@@ -101,13 +104,14 @@ const LetterInCreate: FC = () => {
 
         try {
             await client.post('/surat-masuk', formData);
-            loading(false);
             alert.success(text('message:letter_creation_success'), true, undefined, () => {
                 router.push('/letters/in').then();
             });
         } catch (error: any) {
-            loading(false);
             alert.danger(error.message || text('message:letter_creation_failed'));
+        } finally {
+            loading(false);
+            setIsSubmiting(false);
         }
     };
 
@@ -137,7 +141,7 @@ const LetterInCreate: FC = () => {
                         label={text('classification')}
                         value={letterData.klasifikasi_surat.name}
                         options={classifications.map((classification) => ({
-                            label: classification.name,
+                            label: text(classification.name),
                             value: classification.name,
                         }))}
                         onChange={handleClassificationChange}
@@ -150,7 +154,7 @@ const LetterInCreate: FC = () => {
                         placeholder={text('message:letter_sender_prompt')}
                     />
                     <Select
-                        label={text('recepient')}
+                        label={text('recipient')}
                         value={letterData.penerima.uuid || ''}
                         options={users.map((user) => ({label: user.name + ' - ' + user.jabatan, value: user.uuid}))}
                         onChange={handleUserChange}
@@ -163,7 +167,7 @@ const LetterInCreate: FC = () => {
                         placeholder={text('message:letter_description_prompt')}
                         rows={4}
                     />
-                    <Button label={text('generate_letter')} onClick={handleSubmit} disabled={!isFormComplete}/>
+                    <Button label={text('generate_letter')} onClick={handleSubmit} disabled={!isFormComplete && isSubmiting}/>
                 </div>
             </aside>
         </div>

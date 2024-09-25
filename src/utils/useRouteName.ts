@@ -3,4 +3,4 @@ export const useRouteName = (path: string): string => {
     return baseRoute.charAt(0).toUpperCase() + baseRoute.slice(1);
 };
 
-export const is404Page = (path: string): boolean => path === '/404';
+export const is404Page = (path: string): boolean => path === '/404' || path === '/test';

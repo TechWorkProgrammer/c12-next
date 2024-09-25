@@ -4,6 +4,7 @@ import Button from '@/components/common/Button';
 import { User } from '@/interfaces/User';
 import { useAlert } from '@/contexts/AlertContext';
 import client from '@/api/client';
+import {DetailLetterIn, Disposisi, DisposisiLevel2} from "@/interfaces/LetterIn";
 
 interface SignatureModalProps {
     isOpen: boolean;
@@ -11,11 +12,11 @@ interface SignatureModalProps {
     selectedUsers: User[];
     selectedDisposisi: string[];
     note: string;
-    letter: any;
-    parentDisposisi?: any;
+    letter: DetailLetterIn | null;
+    parentDisposisi?: Disposisi | DisposisiLevel2 | null;
 }
 
-const SignatureModal: React.FC<SignatureModalProps> = ({ isOpen, onClose, selectedUsers, selectedDisposisi, note, letter, parentDisposisi }) => {
+const SignatureModal: React.FC<SignatureModalProps> = ({ isOpen, onClose, selectedUsers, selectedDisposisi, note, letter, parentDisposisi = null }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const [isDrawing, setIsDrawing] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);

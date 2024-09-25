@@ -4,27 +4,34 @@ interface DownloadButtonProps {
     label?: boolean;
     fileUrl: string;
     fileName: string;
-    onGeneratePDF?: () => void;
+    onGeneratePDF?: () => Promise<void>;
 }
 
-const DownloadButton: React.FC<DownloadButtonProps> = ({ label = false, fileUrl, fileName, onGeneratePDF }) => {
-    const handleDownload = () => {
+const DownloadButton: React.FC<DownloadButtonProps> = ({label = false, fileUrl, fileName, onGeneratePDF}) => {
+    const handleDownload = async () => {
         if (fileUrl) {
-            const link = document.createElement('a');
-            link.href = fileUrl;
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            const response = await fetch(fileUrl);
+            const blob = await response.blob();
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function () {
+                const base64data = reader.result as string;
+                const link = document.createElement('a');
+                link.href = base64data;
+                link.setAttribute('download', fileName);
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
         } else if (onGeneratePDF) {
-            onGeneratePDF();
+            await onGeneratePDF();
         }
     };
 
     return (
         <button
             onClick={handleDownload}
-            className="flex items-center p-1 rounded bg-blue-200 text-blue-800 font-bold text-sm hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+            className="flex items-center p-1 rounded bg-blue-200 text-blue-800 font-bold text-sm hover:bg-blue-300"
         >
             <svg
                 className="w-4 h-4 text-blue-800"

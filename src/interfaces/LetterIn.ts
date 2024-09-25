@@ -1,5 +1,7 @@
 import {User, UserStatus} from "@/interfaces/User";
 import {TimeStamp} from "@/interfaces/TimeStamp";
+import {UUID} from "node:crypto";
+import {Identifiable} from "@/interfaces/Identifiable";
 
 export interface LetterIn extends TimeStamp {
     file_surat: string;
@@ -30,7 +32,7 @@ export interface DetailLetterIn extends LetterIn {
 
 export interface Disposisi extends TimeStamp {
     disposisi_asal: null;
-    isi_disposisis: IsiDisposisi[];
+    isi_disposisis: IsiDisposisis[];
     catatan: string;
     tanda_tangan: string
     creator: User;
@@ -40,7 +42,7 @@ export interface Disposisi extends TimeStamp {
 
 export interface DisposisiLevel2 extends TimeStamp {
     disposisi_asal: Disposisi | null;
-    isi_disposisis: IsiDisposisi[];
+    isi_disposisis: IsiDisposisis[];
     catatan: string;
     tanda_tangan: string;
     creator: User;
@@ -50,7 +52,7 @@ export interface DisposisiLevel2 extends TimeStamp {
 
 export interface DisposisiLevel3 extends TimeStamp {
     disposisi_asal: DisposisiLevel2 | null;
-    isi_disposisis: IsiDisposisi[];
+    isi_disposisis: IsiDisposisis[];
     catatan: string;
     tanda_tangan: string;
     creator: User;
@@ -67,6 +69,10 @@ export interface LogDisposisi extends TimeStamp {
 
 export interface Klasifikasi extends TimeStamp {
     name: string;
+}
+
+export interface IsiDisposisis extends Identifiable{
+    isi_disposisi: IsiDisposisi;
 }
 
 export interface IsiDisposisi extends TimeStamp {
