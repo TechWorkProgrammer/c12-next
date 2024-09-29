@@ -165,7 +165,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
                             </Link>
                         </li>
                     )}
-                    {user && (
+                    {/*{user && (
                         <li>
                             <Link
                                 href="/qr"
@@ -190,7 +190,7 @@ const Sidebar: React.FC<SidebarProps> = ({isOpen}) => {
                                 </span>
                             </Link>
                         </li>
-                    )}
+                    )}*/}
                 </ul>
 
                 <ul className="pt-5 space-y-2">

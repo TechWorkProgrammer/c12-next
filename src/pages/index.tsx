@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Faq} from "@/interfaces/Faq";
 import faq_id from "@/data/faq_id.json";
-import faq_jv from "@/data/faq_jv.json";
 import faq_en from "@/data/faq_en.json";
 import Input from "@/components/forms/Input";
 import Image from "next/image";
@@ -18,20 +17,7 @@ const Home: React.FC = () => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        let selectedFaqs: Faq[];
-        switch (language) {
-            case 'id':
-                selectedFaqs = faq_id;
-                break;
-            case 'jv':
-                selectedFaqs = faq_jv;
-                break;
-            case 'en':
-                selectedFaqs = faq_en;
-                break;
-            default:
-                selectedFaqs = faq_id;
-        }
+        const selectedFaqs = language === 'en' ? faq_en : faq_id;
         setFaqs(selectedFaqs);
         setFilteredFaqs(selectedFaqs.slice(0, 2));
     }, [language]);

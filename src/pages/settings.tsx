@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useTheme} from '@/contexts/ThemeContext';
 import {useLanguage} from '@/contexts/LanguageContext';
 import Select from '@/components/forms/Select';
 import {useTranslation} from '@/utils/useTranslation';
 import {getCurrentUser} from "@/storage/auth";
+import GenerateLogPDF from "@/components/common/GenerateLogPDF";
 
 const Settings: React.FC = () => {
     const {theme, toggleTheme, sidebarPosition, toggleSidebarPosition, fontFamily, toggleFontFamily} = useTheme();
     const {language, toggleLanguage} = useLanguage();
+    const [selectedMonth, setSelectedMonth] = useState<string>(String(new Date().getMonth() + 1));
+    const [selectedYear, setSelectedYear] = useState<string>(String(new Date().getFullYear()));
     const user = getCurrentUser();
     const text = useTranslation();
 
@@ -24,8 +27,7 @@ const Settings: React.FC = () => {
 
     const languageOptions = [
         {label: 'English', value: 'en'},
-        {label: 'Bahasa Indonesia (Beta)', value: 'id'},
-        {label: 'Basa Jawa (Beta)', value: 'jv'}
+        {label: 'Bahasa Indonesia', value: 'id'}
     ];
 
     const fontOptions = [
@@ -38,6 +40,16 @@ const Settings: React.FC = () => {
         {label: 'Times New Roman', value: 'timesNewRoman', style: 'font-timesNewRoman'},
         {label: 'Verdana', value: 'verdana', style: 'font-verdana'},
     ];
+
+    const monthOptions = Array.from({length: 12}, (_, i) => ({
+        label: text(new Date(0, i).toLocaleString('default', {month: 'long'}).toLowerCase()),
+        value: String(i + 1),
+    }));
+
+    const yearOptions = Array.from({length: 10}, (_, i) => {
+        const year = new Date().getFullYear() - i;
+        return {label: year.toString(), value: year.toString()};
+    });
 
     return (
         <>
@@ -89,6 +101,24 @@ const Settings: React.FC = () => {
                         <legend className="mx-2 px-1 text-sm font-bold text-gray-500 dark:text-gray-400">
                             {text('account')}
                         </legend>
+                        <div className="flex flex-row gap-2 justify-between items-center">
+                            <Select
+                                label={text('month')}
+                                value={String(selectedMonth)}
+                                options={monthOptions}
+                                onChange={(value) => setSelectedMonth(value)}
+                            />
+                            <Select
+                                label={text('year')}
+                                value={String(selectedYear)}
+                                options={yearOptions}
+                                onChange={(value) => setSelectedYear(value)}
+                            />
+                        </div>
+                        <div className="flex w-full items-center justify-center">
+                            <GenerateLogPDF userName={user.name} userUUID={user.uuid} month={selectedMonth}
+                                            year={selectedYear}/>
+                        </div>
                     </fieldset>
                 </div>
             )}

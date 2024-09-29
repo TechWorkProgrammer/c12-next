@@ -7,6 +7,7 @@ import Viewer from '@/components/common/Viewer';
 import Skeleton from '@/components/common/Skeleton';
 import Custom404 from '@/pages/404';
 import {useDateFormatter} from "@/utils/useDateFormatter";
+import {useTranslation} from "@/utils/useTranslation";
 
 const DisposisiDetail: React.FC = () => {
     const router = useRouter();
@@ -14,6 +15,7 @@ const DisposisiDetail: React.FC = () => {
     const [disposition, setDisposition] = useState<any>(null);
     const [isLoading, setIsLoading] = useState(true);
     const dateFormat = useDateFormatter();
+    const text = useTranslation();
 
     const fetchDispositionDetails = useCallback(async () => {
         if (!uuid) return;
@@ -46,18 +48,18 @@ const DisposisiDetail: React.FC = () => {
                     <Input label="Dibuat Pada" disabled={true} value={dateFormat(disposition.created_at)} />
                     <TextArea
                         rows={3}
-                        label="Isi Disposisi"
+                        label={text('disposition_content')}
                         disabled={true}
-                        value={disposition?.isi_disposisis?.map((isi: any) => isi.isi_disposisi.isi).join(', ') || 'Tidak ada isi disposisi'}
+                        value={disposition?.isi_disposisis?.map((isi: any) => isi.isi_disposisi.isi).join(', ') || text('message:letter_content_disposition_not_found')}
                     />
                     <TextArea
                         rows={3}
-                        label="Catatan"
+                        label={text('note')}
                         disabled={true}
-                        value={disposition?.catatan || 'Tidak ada catatan'}
+                        value={disposition?.catatan || text('letter_disposition_note_not_found')}
                     />
                     <div className="mt-4">
-                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Penerima:</h4>
+                        <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">{text('recipient')}</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {disposition?.log_disposisis?.map((recipient: any) => (
                                 <span

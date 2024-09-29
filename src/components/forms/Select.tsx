@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react';
 import Input from "@/components/forms/Input";
+import {useTranslation} from "@/utils/useTranslation";
 
 interface Option {
     label: string;
@@ -19,6 +20,7 @@ const Select: FC<SelectProps> = ({label = null, value, options, defaultValue, on
     const [selectedValue, setSelectedValue] = useState(value || defaultValue || '');
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
+    const text = useTranslation();
 
     const handleToggle = () => {
         setIsOpen((prev) => !prev);
@@ -102,7 +104,7 @@ const Select: FC<SelectProps> = ({label = null, value, options, defaultValue, on
                     {options.length > 10 && (
                         <div className="px-2 py-1">
                             <Input
-                                label="Pencarian"
+                                label={text('search')}
                                 type="text"
                                 placeholder="Search..."
                                 value={searchTerm}

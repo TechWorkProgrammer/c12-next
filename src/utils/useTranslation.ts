@@ -1,9 +1,8 @@
 import en from '@/data/en.json';
 import id from '@/data/id.json';
-import jv from '@/data/jv.json';
 import {useLanguage} from '@/contexts/LanguageContext';
 
-const translations: any = {en, id, jv};
+const translations: any = {en, id};
 
 export const useTranslation = () => {
     const {language} = useLanguage();
